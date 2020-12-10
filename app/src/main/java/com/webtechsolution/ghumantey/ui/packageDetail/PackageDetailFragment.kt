@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackageDetailFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import com.webtechsolution.ghumantey.ui.packageDetail.adapter.IternaryAdapter
@@ -35,6 +38,13 @@ class PackageDetailFragment : BaseFragment() {
         viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
+        binding.appToolbar.apply {
+            appToolbar.apply {
+                toolbarTitle.text = "Package Detail"
+                NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
+            }
+        }
         binding.includedRv.adapter = adapter
         binding.excludedRv.adapter = adapter
     }

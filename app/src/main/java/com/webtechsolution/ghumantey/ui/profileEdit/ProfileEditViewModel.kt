@@ -15,9 +15,11 @@ class ProfileEditViewModel @ViewModelInject constructor() : BaseViewModel() {
     private val _state = MutableLiveData<ProfileUiState>()
     val state= _state as LiveData<ProfileUiState>
     fun setImage(image: String) {
-        _state.value?.copy(
-            image = image
-        )
+        _state.value.apply {
+            this?.copy(
+                image = image
+            )
+        }
     }
 
 }

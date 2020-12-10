@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import com.mlsdev.rximagepicker.RxImagePicker
 import com.mlsdev.rximagepicker.Sources
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -40,12 +42,21 @@ class ProfileEditFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.appToolbar.apply {
-          //  NavigationUI.setupWithNavController(this, findNavController())
+            appToolbar.apply {
+                toolbarTitle.text = "Profile Edit "
+                NavigationUI.setupWithNavController(this, findNavController())
+            }
         }
         binding.editImageCard.setOnClickListener {
             getDialog()
         }
+        viewModel.state.observe(viewLifecycleOwner, Observer {
+            Glide.with(requireContext()).load(it.image).into(binding.icEditImage)
+        })
 
+        binding.editProfileBtn.setOnClickListener {
+            findNavController().navigate(ProfileEditFragmentDirections.actionProfileEditFragmentToMyProfileFragment())
+        }
     }
 
     private fun getDialog() {
@@ -57,9 +68,11 @@ class ProfileEditFragment : BaseFragment() {
         val gallary = dialog.findViewById(R.id.gallary_title) as TextView
         camera.setOnClickListener {
            pickLocalImage(Sources.CAMERA)
+            dialog.dismiss()
         }
         gallary.setOnClickListener {
             pickLocalImage(Sources.GALLERY)
+            dialog.dismiss()
         }
         dialog.show()
     }

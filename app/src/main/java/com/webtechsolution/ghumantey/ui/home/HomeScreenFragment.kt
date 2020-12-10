@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import com.webtechsolution.ghumantey.MainActivity
 import com.webtechsolution.ghumantey.R
@@ -60,5 +61,8 @@ class HomeScreenFragment : BaseFragment() {
                 findNavController().navigate(HomeScreenFragmentDirections.actionHomeScreenFragmentToMyProfileFragment())
             }
         }
+        binding.toolbar.apply {
+        }
+
     }
 }

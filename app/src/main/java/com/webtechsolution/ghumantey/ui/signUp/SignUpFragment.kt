@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.databinding.SignUpFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,5 +27,11 @@ class SignUpFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.appToolbar.apply {
+            appToolbar.apply {
+                toolbarTitle.text = "Sign Up "
+                NavigationUI.setupWithNavController(this, findNavController())
+            }
+        }
     }
 }

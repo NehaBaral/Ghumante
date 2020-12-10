@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.MyProfileFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
@@ -28,11 +29,21 @@ class MyProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.appbarToolbar.apply {
+        binding.toolbar.apply {
             appToolbar.inflateMenu(R.menu.edit)
             appToolbar.setOnMenuItemClickListener {
                 findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToProfileEditFragment())
                 true
+            }
+            binding.toolbar.apply {
+                appToolbar.apply {
+                    toolbarTitle.text = "Profile "
+                    NavigationUI.setupWithNavController(this, findNavController())
+                    setNavigationIcon(R.drawable.ic_arrow_back)
+                }
+            }
+            binding.myBooking.setOnClickListener {
+                findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToMyBookingFragment())
             }
         }
     }

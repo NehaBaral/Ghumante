@@ -45,20 +45,41 @@
     <fragment
         android:id="@+id/destination_fragment"
         android:name="com.webtechsolution.ghumantey.ui.destination.DestinationFragment"
-        tools:layout="@layout/destination_fragment" />
+        tools:layout="@layout/destination_fragment">
+        <action
+            android:id="@+id/action_destination_fragment_to_package_detail_fragment"
+            app:destination="@id/package_detail_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/my_profile_fragment"
         android:name="com.webtechsolution.ghumantey.ui.myProfile.MyProfileFragment"
-        tools:layout="@layout/my_profile_fragment" >
+        tools:layout="@layout/my_profile_fragment">
         <action
             android:id="@+id/action_my_profile_fragment_to_profile_edit_fragment"
             app:destination="@id/profile_edit_fragment" />
+        <action
+            android:id="@+id/action_my_profile_fragment_to_my_booking_fragment"
+            app:destination="@id/my_booking_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/profile_edit_fragment"
         android:name="com.webtechsolution.ghumantey.ui.profileEdit.ProfileEditFragment"
-        tools:layout="@layout/profile_edit_fragment" />
+        tools:layout="@layout/profile_edit_fragment">
+        <action
+            android:id="@+id/action_profile_edit_fragment_to_my_profile_fragment"
+            app:destination="@id/my_profile_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/package_detail_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.packageDetail.PackageDetailFragment"
+        tools:layout="@layout/package_detail_fragment" />
+
+    <fragment
+        android:id="@+id/my_booking_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.myBooking.MyBookingFragment"
+        tools:layout="@layout/my_booking_fragment" />
 
 </navigation>

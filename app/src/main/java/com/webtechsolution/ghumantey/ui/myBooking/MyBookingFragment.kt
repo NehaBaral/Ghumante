@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.MyBookingFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import com.webtechsolution.ghumantey.ui.myBooking.adapter.MyBookingAdapter
@@ -36,5 +39,12 @@ class MyBookingFragment : BaseFragment() {
         viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
+        binding.appToolbar.apply {
+            appToolbar.apply {
+                toolbarTitle.text = "My Booking "
+                NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
+            }
+        }
     }
 }

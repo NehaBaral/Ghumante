@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.DestinationFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import com.webtechsolution.ghumantey.ui.destination.adapter.PackageListAdapter
@@ -35,5 +38,15 @@ class DestinationFragment : BaseFragment() {
         viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
+        binding.toolbar.apply {
+            appToolbar.apply {
+                toolbarTitle.text = "Destination "
+                NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
+            }
+        }
+        adapter.clicks().subscribe {
+            findNavController().navigate(DestinationFragmentDirections.actionDestinationFragmentToPackageDetailFragment())
+        }.isDisposed
     }
 }
