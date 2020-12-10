@@ -10,10 +10,18 @@
         tools:layout="@layout/splash_screen_fragment">
         <action
             android:id="@+id/action_splash_screen_fragment_to_sign_in_fragment"
-            app:destination="@id/sign_in_fragment" />
+            app:destination="@id/sign_in_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_splash_screen_fragment_to_sign_up_fragment"
-            app:destination="@id/sign_up_fragment" />
+            app:destination="@id/sign_up_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -22,7 +30,11 @@
         tools:layout="@layout/sign_in_fragment">
         <action
             android:id="@+id/action_sign_in_fragment_to_home_screen_fragment"
-            app:destination="@id/home_screen_fragment" />
+            app:destination="@id/home_screen_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -36,10 +48,18 @@
         tools:layout="@layout/home_screen_fragment">
         <action
             android:id="@+id/action_home_screen_fragment_to_destination_fragment"
-            app:destination="@id/destination_fragment" />
+            app:destination="@id/destination_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_home_screen_fragment_to_my_profile_fragment"
-            app:destination="@id/my_profile_fragment" />
+            app:destination="@id/my_profile_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -48,7 +68,11 @@
         tools:layout="@layout/destination_fragment">
         <action
             android:id="@+id/action_destination_fragment_to_package_detail_fragment"
-            app:destination="@id/package_detail_fragment" />
+            app:destination="@id/package_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -57,10 +81,18 @@
         tools:layout="@layout/my_profile_fragment">
         <action
             android:id="@+id/action_my_profile_fragment_to_profile_edit_fragment"
-            app:destination="@id/profile_edit_fragment" />
+            app:destination="@id/profile_edit_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_my_profile_fragment_to_my_booking_fragment"
-            app:destination="@id/my_booking_fragment" />
+            app:destination="@id/my_booking_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -69,7 +101,11 @@
         tools:layout="@layout/profile_edit_fragment">
         <action
             android:id="@+id/action_profile_edit_fragment_to_my_profile_fragment"
-            app:destination="@id/my_profile_fragment" />
+            app:destination="@id/my_profile_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
