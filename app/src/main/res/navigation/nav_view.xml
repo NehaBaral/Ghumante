@@ -111,11 +111,24 @@
     <fragment
         android:id="@+id/package_detail_fragment"
         android:name="com.webtechsolution.ghumantey.ui.packageDetail.PackageDetailFragment"
-        tools:layout="@layout/package_detail_fragment" />
+        tools:layout="@layout/package_detail_fragment" >
+        <action
+            android:id="@+id/action_package_detail_fragment_to_review_fragment"
+            app:destination="@id/review_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/my_booking_fragment"
         android:name="com.webtechsolution.ghumantey.ui.myBooking.MyBookingFragment"
         tools:layout="@layout/my_booking_fragment" />
+
+    <fragment
+        android:id="@+id/review_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.review.ReviewFragment"
+        tools:layout="@layout/review_fragment"/>
 
 </navigation>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -94,7 +95,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.01"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/package_amount"
+                    app:layout_constraintTop_toBottomOf="@+id/book_now_btn"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <LinearLayout
@@ -120,7 +121,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/iternaries_rv"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:orientation="vertical"
@@ -151,7 +152,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/included_rv"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +179,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/excluded_rv"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
