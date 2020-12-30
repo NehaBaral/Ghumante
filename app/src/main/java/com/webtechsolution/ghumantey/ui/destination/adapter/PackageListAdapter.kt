@@ -29,9 +29,7 @@ class PackageListAdapter @Inject constructor() : ListAdapter<DestinationModel,Pa
             binding.root.clicks().map { item }.subscribe(clickRelay)
         }
     }
-
 }
-
 class PackageListDiff : DiffUtil.ItemCallback<DestinationModel>() {
     override fun areItemsTheSame(oldItem: DestinationModel, newItem: DestinationModel) = oldItem == newItem
 
