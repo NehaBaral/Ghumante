@@ -1,4 +1,4 @@
-package com.webtechsolution.ghumantey.ui.destination.adapter
+package com.webtechsolution.ghumantey.ui.packages.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

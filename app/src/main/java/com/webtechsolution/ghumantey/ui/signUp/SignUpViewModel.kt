@@ -17,14 +17,11 @@ data class SignUpState(
     val success: SingleEvent<Unit> = SingleEvent()
 )
 class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
-    private val _state = MutableLiveData<SignUpState>()
+    private val _state = MutableLiveData(SignUpState())
     val state = _state as LiveData<SignUpState>
 
     fun userRegister(username: String, email: String, password: String) {
-        val firstSpace: Int = username.indexOf(" ") // detect the first space character
-        val firstName: String = username.substring(0, firstSpace) // get everything upto the first space character
-        val lastName: String = username.substring(firstSpace).trim()
-        apiInterface.userRegister(firstName,lastName,email,password)
+        apiInterface.userRegister(username,email,password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }

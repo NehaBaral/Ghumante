@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.jakewharton.rxbinding3.widget.textChanges
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.SignInFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
@@ -30,9 +31,6 @@ class SignInFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.signInBtn.setOnClickListener {
-            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
-        }
         binding.appbarToolbar.apply {
             appToolbar.apply {
                 toolbarTitle.text = "Sign In "
@@ -41,28 +39,33 @@ class SignInFragment : BaseFragment() {
             }
         }
         binding.apply {
-            val email = icEmail.text.toString()
-            val password = icPassword.text.toString()
+            signInBtn.setOnClickListener {
+                val email = icEmail.text.toString()
+                val password = icPassword.text.toString()
 
-            if (password.isBlank()){
-                icPasswordField.error = "Please enter valid password"
+                if (password.isBlank()) {
+                    icPasswordField.error = "Please enter valid password"
+                }
+                if (email.isBlank()) {
+                    icEmailField.error = "Please enter valid email"
+                }
+                if (email.isNotBlank() && password.isNotBlank()) {
+                    viewModel.userSignIn(email, password)
+                } else {
+                    icEmailField.error = "Please enter valid email"
+                }
             }
-            if (email.isBlank()){
-                icEmailField.error = "Please enter valid email"
-            }
-            if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.isNotBlank()){
-                viewModel.userSignIn(email,password)
-            }else{
-                icEmailField.error = "Please enter valid email"
-            }
+            viewModel.state.observe(viewLifecycleOwner, Observer { uiState ->
+                if (uiState.loadingDialog) showLoadingDialog("Signing you up")
+                else hideLoadingDialog()
+               // uiState.toast.value.let { toast(it!!) }
+                uiState.success.value?.let {
+                     findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                }
+            })
+
+            binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }.isDisposed
+            binding.icPassword.textChanges().subscribe { binding.icPasswordField.error = null }.isDisposed
         }
-        viewModel.state.observe(viewLifecycleOwner, Observer {uiState->
-            if (uiState.loadingDialog) showLoadingDialog("Signing you up")
-            else hideLoadingDialog()
-            uiState.toast.value.let { toast(it!!) }
-            uiState.success.value?.let {
-                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
-            }
-        })
     }
 }

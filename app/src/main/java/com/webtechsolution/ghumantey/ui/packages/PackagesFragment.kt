@@ -1,4 +1,4 @@
-package com.webtechsolution.ghumantey.ui.destination
+package com.webtechsolution.ghumantey.ui.packages
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,26 +9,31 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
-import com.webtechsolution.ghumantey.databinding.DestinationFragmentBinding
+import com.webtechsolution.ghumantey.databinding.PackagesFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
-import com.webtechsolution.ghumantey.ui.destination.adapter.PackageListAdapter
+import com.webtechsolution.ghumantey.ui.packages.adapter.PackageListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DestinationFragment : BaseFragment() {
+class PackagesFragment : BaseFragment() {
     override val viewModel by viewModels<DestinationViewModel>()
 
     @Inject
     lateinit var adapter:PackageListAdapter
-    lateinit var binding:DestinationFragmentBinding
+    lateinit var binding:PackagesFragmentBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+      //  viewModel.getDestinationList()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DestinationFragmentBinding.inflate(layoutInflater,container,false)
+        binding = PackagesFragmentBinding.inflate(layoutInflater,container,false)
         return binding.root
     }
 
@@ -45,8 +50,9 @@ class DestinationFragment : BaseFragment() {
                 setNavigationIcon(R.drawable.ic_arrow_back)
             }
         }
+
         adapter.clicks().subscribe {
-            findNavController().navigate(DestinationFragmentDirections.actionDestinationFragmentToPackageDetailFragment())
+            findNavController().navigate(PackagesFragmentDirections.actionDestinationFragmentToPackageDetailFragment())
         }.isDisposed
     }
 }

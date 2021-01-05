@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.jakewharton.rxbinding3.widget.textChanges
 import com.webtechsolution.ghumantey.databinding.SignUpFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,10 +64,13 @@ class SignUpFragment : BaseFragment() {
         viewModel.state.observe(viewLifecycleOwner, Observer {uiState->
             if (uiState.loadingDialog) showLoadingDialog("Signing you up")
             else hideLoadingDialog()
-            uiState.toast.value.let { toast(it!!) }
             uiState.success.value?.let {
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
             }
         })
+
+        binding.icSignupUname.textChanges().subscribe { binding.icSignupUnameField.error = null }.isDisposed
+        binding.icSignupEmail.textChanges().subscribe { binding.icSignupEmailField.error = null }.isDisposed
+        binding.icSignupPassword.textChanges().subscribe { binding.icSignupPasswordField.error = null }.isDisposed
     }
 }

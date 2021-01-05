@@ -29,6 +29,7 @@ class HomeScreenFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getDestinationList()
        // ((activity as MainActivity).updateStatusBarColor())
     }
 
@@ -46,9 +47,9 @@ class HomeScreenFragment : BaseFragment() {
         adapter = DestinationAdapter()
         binding.destinationRv.adapter = adapter
         binding.recommededRv.adapter = adapter
-        viewModel.state.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-        })
+        /*viewModel.state.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it.destinationList)
+        })*/
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.recommededRv.layoutManager = gridLayoutManager
 
@@ -61,8 +62,13 @@ class HomeScreenFragment : BaseFragment() {
                 findNavController().navigate(HomeScreenFragmentDirections.actionHomeScreenFragmentToMyProfileFragment())
             }
         }
-        binding.toolbar.apply {
-        }
+        viewModel.state.observe(viewLifecycleOwner, Observer {uiState->
+            if (uiState.loading) showLoadingDialog("Loading destination")
+            else hideLoadingDialog()
+            uiState.toast.value?.let { toast(it) }
+            adapter.submitList(uiState.destinationList)
+        })
+
 
     }
 }
