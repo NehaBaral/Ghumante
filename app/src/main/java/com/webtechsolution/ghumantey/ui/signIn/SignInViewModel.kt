@@ -27,14 +27,15 @@ class SignInViewModel @ViewModelInject constructor(private val apiInterface: Api
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }
             .subscribe({ loginResponse ->
-                _state.set {
-                    it.copy(
-                        loadingDialog = false,
+                _state.set { state ->
+                    state.copy(
                         toast = SingleEvent("Login Successful"),
+                        loadingDialog = false,
                         success = Unit.toEvent()
                     )
                 }
-            }, {
+            }, {throwable->
+                println("Errorrrr===="+throwable.message)
                 _state.set {
                     it.copy(
                         loadingDialog = false,

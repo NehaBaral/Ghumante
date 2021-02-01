@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackagesFragmentBinding
@@ -18,13 +19,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PackagesFragment : BaseFragment() {
     override val viewModel by viewModels<DestinationViewModel>()
-
+    private val args by navArgs<PackagesFragmentArgs>()
     @Inject
     lateinit var adapter:PackageListAdapter
     lateinit var binding:PackagesFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getDestinationList(args)
       //  viewModel.getDestinationList()
     }
 
@@ -41,7 +43,7 @@ class PackagesFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.packageListRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            adapter.submitList(it.packagesList)
         })
         binding.toolbar.apply {
             appToolbar.apply {

@@ -81,6 +81,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="destinationId"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -127,6 +130,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <!--<action
+            android:id="@+id/action_package_detail_fragment_to_package_book_bottomSheet"
+            app:destination="@id/package_book_bottomSheet"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>-->
     </fragment>
 
     <fragment
@@ -138,5 +148,9 @@
         android:id="@+id/review_fragment"
         android:name="com.webtechsolution.ghumantey.ui.review.ReviewFragment"
         tools:layout="@layout/review_fragment"/>
+
+    <!--<dialog android:id="@+id/package_book_bottomSheet"
+        android:name="com.webtechsolution.ghumantey.ui.packageBook.PackageBookBottomSheet"
+        tools:layout="@layout/package_book_bottomsheet"/>-->
 
 </navigation>

@@ -2,16 +2,13 @@ package com.webtechsolution.ghumantey.data
 
 import com.webtechsolution.ghumantey.data.model.Auth
 import com.webtechsolution.ghumantey.data.model.DestinationList
+import com.webtechsolution.ghumantey.data.model.PackagesModel
 import com.webtechsolution.ghumantey.data.model.Register
 import io.reactivex.Single
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.io.StringReader
 
 interface ApiInterface {
-
     @FormUrlEncoded
     @POST("signup")
     fun userRegister(
@@ -27,7 +24,10 @@ interface ApiInterface {
         @Field("password") password: String
     ):Single<Auth>
 
-    @GET("/destinations")
+    @GET("destinations")
     fun getUserDestination():Single<DestinationList>
+
+    @GET("destination/{id}/packages")
+    fun getDestinationPackages(@Path("id") destinationId:String):Single<PackagesModel>
 
 }

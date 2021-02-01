@@ -54,15 +54,17 @@ class SignInFragment : BaseFragment() {
                 } else {
                     icEmailField.error = "Please enter valid email"
                 }
+                viewModel.state.observe(viewLifecycleOwner, Observer { uiState ->
+                    if (uiState.loadingDialog) showLoadingDialog("Signing you up")
+                    else hideLoadingDialog()
+                    //uiState.toast.value.let { toast(it!!) }
+                    binding.icEmail.error = uiState.emailError
+                    binding.icPassword.error = uiState.passwordError
+                    uiState.success.value?.let {
+                        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                    }
+                })
             }
-            viewModel.state.observe(viewLifecycleOwner, Observer { uiState ->
-                if (uiState.loadingDialog) showLoadingDialog("Signing you up")
-                else hideLoadingDialog()
-               // uiState.toast.value.let { toast(it!!) }
-                uiState.success.value?.let {
-                     findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
-                }
-            })
 
             binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }.isDisposed
             binding.icPassword.textChanges().subscribe { binding.icPasswordField.error = null }.isDisposed

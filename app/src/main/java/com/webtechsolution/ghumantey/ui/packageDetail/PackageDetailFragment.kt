@@ -34,6 +34,9 @@ class PackageDetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.bookNowBtn.setOnClickListener {
+            //findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet())
+        }
         binding.iternariesRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

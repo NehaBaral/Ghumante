@@ -54,7 +54,7 @@ class HomeScreenFragment : BaseFragment() {
         binding.recommededRv.layoutManager = gridLayoutManager
 
         adapter.clicks().subscribe {
-            findNavController().navigate(HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment())
+            findNavController().navigate(HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(it._id))
         }.isDisposed
 
         binding.apply {
