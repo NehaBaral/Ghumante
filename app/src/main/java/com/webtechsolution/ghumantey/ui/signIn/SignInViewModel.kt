@@ -22,7 +22,7 @@ class SignInViewModel @ViewModelInject constructor(private val apiInterface: Api
     private val _state = MutableLiveData(SignInUiState())
     val state = _state as LiveData<SignInUiState>
     fun userSignIn(email: String, password: String) {
-        apiInterface.userLogin(email,password)
+       /* apiInterface.userLogin(email,password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }
@@ -42,7 +42,7 @@ class SignInViewModel @ViewModelInject constructor(private val apiInterface: Api
                         toast = SingleEvent("Login Failed"),
                     )
                 }
-            }).isDisposed
+            }).isDisposed*/
 
     }
 }

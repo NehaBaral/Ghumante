@@ -1,5 +1,8 @@
 package com.webtechsolution.ghumantey.data
 
+import com.webtechsolution.ghumantey.data.domain.PackagesList
+import com.webtechsolution.ghumantey.data.domain.SearchBody
+import com.webtechsolution.ghumantey.data.domain.SearchPackage
 import com.webtechsolution.ghumantey.data.model.Auth
 import com.webtechsolution.ghumantey.data.model.DestinationList
 import com.webtechsolution.ghumantey.data.model.PackagesModel
@@ -9,7 +12,7 @@ import retrofit2.http.*
 import java.io.StringReader
 
 interface ApiInterface {
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("signup")
     fun userRegister(
         @Field("username") username:String,
@@ -22,12 +25,17 @@ interface ApiInterface {
     fun userLogin(
         @Field("username") username: String,
         @Field("password") password: String
-    ):Single<Auth>
+    ):Single<Auth>*/
 
-    @GET("destinations")
-    fun getUserDestination():Single<DestinationList>
+    @GET("Packages")
+    fun getPackagesList():Single<PackagesList>
 
-    @GET("destination/{id}/packages")
-    fun getDestinationPackages(@Path("id") destinationId:String):Single<PackagesModel>
+    @POST("search")
+    fun getSearchPackages(
+        @Body destination:SearchBody
+    ):Single<SearchPackage>
+
+    /*@GET("destination/{id}/packages")
+    fun getDestinationPackages(@Path("id") destinationId:String):Single<PackagesModel>*/
 
 }

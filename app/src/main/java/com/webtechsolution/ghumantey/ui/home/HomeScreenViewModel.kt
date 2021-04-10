@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
 import com.webtechsolution.ghumantey.data.RoomDB
-import com.webtechsolution.ghumantey.data.model.Data
+import com.webtechsolution.ghumantey.data.domain.PackagesListItem
+import com.webtechsolution.ghumantey.data.domain.SearchBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
 import com.webtechsolution.ghumantey.helpers.set
@@ -15,7 +16,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 data class destinationUiState(
-    val destinationList: List<Data> = emptyList(),
+    val destinationList: List<PackagesListItem> = emptyList(),
     val loading: Boolean = false,
     val showError: Boolean = false,
     val toast: SingleEvent<String> = SingleEvent()
@@ -24,17 +25,18 @@ class HomeScreenViewModel @ViewModelInject constructor(private val apiInterface:
     private val _state = MutableLiveData(destinationUiState())
     val state = _state as LiveData<destinationUiState>
     fun getDestinationList() {
-        roomDB.destinationDao.getAllDestination()
+        roomDB.destinationDao.getAllPackages()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loading = true) } }
             .subscribe({destinationList->
                 _state.update {
                     copy(
-                        destinationList = destinationList,
+                        destinationList = destinationList
                     )
                 }
             },{throwable->
+                throwable.message
                 throwable.printStackTrace()
                 _state.update {
                     copy(
@@ -46,12 +48,12 @@ class HomeScreenViewModel @ViewModelInject constructor(private val apiInterface:
     }
 
     private fun getServerDestination(){
-        apiInterface.getUserDestination()
+        apiInterface.getPackagesList()
             .subscribeOn(Schedulers.io())
             .doOnSubscribe { _state.update { copy(loading = true) } }
             .flatMapCompletable {
                 println("destination======"+it)
-                Completable.fromAction { roomDB.destinationDao.insertDestination(it.data) }
+                Completable.fromAction { roomDB.destinationDao.insertPackage(it) }
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -61,7 +63,34 @@ class HomeScreenViewModel @ViewModelInject constructor(private val apiInterface:
                     )
                 }
             }, { throwable ->
-                println("Error====" + throwable.printStackTrace())
+                println("Error====" + throwable.message)
+                _state.update {
+                    copy(
+                        loading = false,
+                        toast = SingleEvent("Server error")
+                    )
+                }
+            }).isDisposed
+    }
+
+    fun searchPackageApi(searchDestination: String) {
+        val searchBody:SearchBody = SearchBody(searchDestination)
+        apiInterface.getSearchPackages(searchBody)
+            .subscribeOn(Schedulers.io())
+            .doOnSubscribe { _state.update { copy(loading = true) } }
+            /*.flatMapCompletable {
+           //     println("destination======"+it)
+            //    Completable.fromAction { roomDB.searchPackageDao.insertPackage(it) }
+            }*/
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                _state.update {
+                    copy(
+                        loading = false
+                    )
+                }
+            }, { throwable ->
+                println("Error====" + throwable.message)
                 _state.update {
                     copy(
                         loading = false,

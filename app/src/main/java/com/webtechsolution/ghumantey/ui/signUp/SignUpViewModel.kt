@@ -21,7 +21,7 @@ class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterfac
     val state = _state as LiveData<SignUpState>
 
     fun userRegister(username: String, email: String, password: String){
-        apiInterface.userRegister(username,email,password)
+        /*apiInterface.userRegister(username,email,password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }
@@ -42,7 +42,7 @@ class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterfac
                         toast = SingleEvent("Sign up failed")
                     )
                 }
-            }).isDisposed
+            }).isDisposed*/
     }
 
 }

@@ -47,9 +47,9 @@ class HomeScreenFragment : BaseFragment() {
         adapter = DestinationAdapter()
         binding.destinationRv.adapter = adapter
         binding.recommededRv.adapter = adapter
-        /*viewModel.state.observe(viewLifecycleOwner, Observer {
+        viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.destinationList)
-        })*/
+        })
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.recommededRv.layoutManager = gridLayoutManager
 
@@ -69,6 +69,12 @@ class HomeScreenFragment : BaseFragment() {
             adapter.submitList(uiState.destinationList)
         })
 
+        binding.searchButton.setOnClickListener {
+            if (binding.icSearch.text.toString() != null){
+                findNavController().navigate(HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(binding.icSearch.text.toString()))
+                //viewModel.searchPackageApi(binding.icSearch.text.toString())
+            }
+        }
 
     }
 }

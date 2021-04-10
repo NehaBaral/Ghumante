@@ -40,7 +40,8 @@ class SignInFragment : BaseFragment() {
         }
         binding.apply {
             signInBtn.setOnClickListener {
-                val email = icEmail.text.toString()
+                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                /*val email = icEmail.text.toString()
                 val password = icPassword.text.toString()
 
                 if (password.isBlank()) {
@@ -63,7 +64,7 @@ class SignInFragment : BaseFragment() {
                     uiState.success.value?.let {
                         findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
                     }
-                })
+                })*/
             }
 
             binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }.isDisposed

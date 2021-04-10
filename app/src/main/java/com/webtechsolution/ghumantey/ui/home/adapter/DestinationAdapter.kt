@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.view.clicks
+import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.data.model.Data
 import com.webtechsolution.ghumantey.data.model.DestinationModel
 import com.webtechsolution.ghumantey.databinding.DestinationRvBinding
@@ -14,8 +15,8 @@ import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 @FragmentScoped
-class DestinationAdapter @Inject constructor() : ListAdapter<Data, DestinationAdapter.DestinationViewHolder>(DestinationDiff()) {
-    private val clickRelay: PublishSubject<Data> = PublishSubject.create()
+class DestinationAdapter @Inject constructor() : ListAdapter<PackagesListItem, DestinationAdapter.DestinationViewHolder>(DestinationDiff()) {
+    private val clickRelay: PublishSubject<PackagesListItem> = PublishSubject.create()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DestinationViewHolder {
         return DestinationViewHolder(clickRelay,DestinationRvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -25,17 +26,19 @@ class DestinationAdapter @Inject constructor() : ListAdapter<Data, DestinationAd
        holder.bind(getItem(position))
     }
 
-    class DestinationViewHolder(private val clickRelay: PublishSubject<Data>,val binding:DestinationRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Data) {
+    class DestinationViewHolder(private val clickRelay: PublishSubject<PackagesListItem>,val binding:DestinationRvBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: PackagesListItem) {
+            binding.destinationName.text = item.name
+            binding.destinationAddress.text = item.agency
             binding.root.clicks().map { item }.subscribe(clickRelay)
         }
     }
 }
 
-class DestinationDiff : DiffUtil.ItemCallback<Data>() {
-    override fun areItemsTheSame(oldItem: Data, newItem: Data) = oldItem == newItem
+class DestinationDiff : DiffUtil.ItemCallback<PackagesListItem>() {
+    override fun areItemsTheSame(oldItem: PackagesListItem, newItem: PackagesListItem) = oldItem == newItem
 
-    override fun areContentsTheSame(oldItem: Data, newItem: Data) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: PackagesListItem, newItem: PackagesListItem) = oldItem == newItem
 
-    override fun getChangePayload(oldItem: Data, newItem: Data) = Unit
+    override fun getChangePayload(oldItem: PackagesListItem, newItem: PackagesListItem) = Unit
 }
