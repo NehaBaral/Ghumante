@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/app_toolbar"
+        android:id="@+id/toolbar_app"
         android:layout_width="match_parent"
         android:elevation="0dp"
         android:layout_height="?attr/actionBarSize">

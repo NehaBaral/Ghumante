@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackageDetailFragmentBinding
@@ -19,9 +20,12 @@ import javax.inject.Inject
 class PackageDetailFragment : BaseFragment() {
     override val viewModel by viewModels<PackageDetailViewModel>()
     lateinit var binding:PackageDetailFragmentBinding
+    private val args by navArgs<PackageDetailFragmentArgs>()
 
-    @Inject
-    lateinit var adapter: IternaryAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getPackageDetail(args)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,18 +41,26 @@ class PackageDetailFragment : BaseFragment() {
         binding.bookNowBtn.setOnClickListener {
             //findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet())
         }
-        binding.iternariesRv.adapter = adapter
-        viewModel.state.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+
+        viewModel.pState.observe(viewLifecycleOwner, Observer {
+            it.packageDetail.let {item->
+                binding.packageAmount.text = item?.price.toString()
+                binding.packageDesc.text = item?.description.toString()
+                binding.packageDays.text = item?.updatedAt
+            }
         })
-        binding.appToolbar.apply {
-            appToolbar.apply {
+      /*  binding.appToolbar.apply {
                 toolbarTitle.text = "Package Detail"
                 NavigationUI.setupWithNavController(this, findNavController())
                 setNavigationIcon(R.drawable.ic_arrow_back)
-            }
+        }*/
+
+        binding.writeReviewBtn.setOnClickListener {
+            findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToReviewFragment(args.packageId))
         }
-        binding.includedRv.adapter = adapter
-        binding.excludedRv.adapter = adapter
+
+        binding.reviewList.setOnClickListener {
+            findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageReviewFragment(args.packageId))
+        }
     }
 }

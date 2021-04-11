@@ -30,13 +30,13 @@ class MyProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.apply {
-            appToolbar.inflateMenu(R.menu.edit)
-            appToolbar.setOnMenuItemClickListener {
+            toolbarApp.inflateMenu(R.menu.edit)
+            toolbarApp.setOnMenuItemClickListener {
                 findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToProfileEditFragment())
                 true
             }
             binding.toolbar.apply {
-                appToolbar.apply {
+                toolbarApp.apply {
                     toolbarTitle.text = "Profile "
                     NavigationUI.setupWithNavController(this, findNavController())
                     setNavigationIcon(R.drawable.ic_arrow_back)

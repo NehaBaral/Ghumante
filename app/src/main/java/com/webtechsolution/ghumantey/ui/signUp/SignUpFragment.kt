@@ -31,8 +31,8 @@ class SignUpFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.appToolbar.apply {
-            appToolbar.apply {
+        binding.toolbarApp.apply {
+            toolbarApp.apply {
                 toolbarTitle.text = "Sign Up "
                 NavigationUI.setupWithNavController(this, findNavController())
             }

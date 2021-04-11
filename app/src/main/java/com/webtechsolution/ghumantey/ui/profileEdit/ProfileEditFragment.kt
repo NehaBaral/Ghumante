@@ -41,8 +41,8 @@ class ProfileEditFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.appToolbar.apply {
-            appToolbar.apply {
+        binding.toolbarApp.apply {
+            toolbarApp.apply {
                 toolbarTitle.text = "Profile Edit "
                 NavigationUI.setupWithNavController(this, findNavController())
             }

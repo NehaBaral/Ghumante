@@ -27,7 +27,6 @@ class PackagesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getDestinationList(args)
-      //  viewModel.getDestinationList()
     }
 
     override fun onCreateView(
@@ -46,15 +45,15 @@ class PackagesFragment : BaseFragment() {
             adapter.submitList(it.packagesList)
         })
         binding.toolbar.apply {
-            appToolbar.apply {
-                toolbarTitle.text = "Destination "
+            toolbarApp.apply {
+                toolbarTitle.text = "Packages "
                 NavigationUI.setupWithNavController(this, findNavController())
                 setNavigationIcon(R.drawable.ic_arrow_back)
             }
         }
 
         adapter.clicks().subscribe {
-            findNavController().navigate(PackagesFragmentDirections.actionDestinationFragmentToPackageDetailFragment())
+            findNavController().navigate(PackagesFragmentDirections.actionDestinationFragmentToPackageDetailFragment(it._id))
         }.isDisposed
     }
 }

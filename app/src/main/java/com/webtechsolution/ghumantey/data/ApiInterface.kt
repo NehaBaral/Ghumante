@@ -1,8 +1,6 @@
 package com.webtechsolution.ghumantey.data
 
-import com.webtechsolution.ghumantey.data.domain.PackagesList
-import com.webtechsolution.ghumantey.data.domain.SearchBody
-import com.webtechsolution.ghumantey.data.domain.SearchPackage
+import com.webtechsolution.ghumantey.data.domain.*
 import com.webtechsolution.ghumantey.data.model.Auth
 import com.webtechsolution.ghumantey.data.model.DestinationList
 import com.webtechsolution.ghumantey.data.model.PackagesModel
@@ -34,6 +32,15 @@ interface ApiInterface {
     fun getSearchPackages(
         @Body destination:SearchBody
     ):Single<SearchPackage>
+
+    @GET("packages/{id}")
+    fun getPackageDetail(@Path("id") packageId:String):Single<PackagesListItem>
+
+    @POST("packages/{id}/comments")
+    fun postComment(@Path("id") packageId:String,@Body commentBody:CommentBody):Single<PackagesListItem>
+
+    @GET("packages/{id}/comments")
+    fun getCommentList(@Path("id") packageId:String):Single<PackagesListItem>
 
     /*@GET("destination/{id}/packages")
     fun getDestinationPackages(@Path("id") destinationId:String):Single<PackagesModel>*/

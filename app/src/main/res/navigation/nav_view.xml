@@ -130,6 +130,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="packageId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_package_detail_fragment_to_package_review_fragment"
+            app:destination="@id/package_review_fragment" />
         <!--<action
             android:id="@+id/action_package_detail_fragment_to_package_book_bottomSheet"
             app:destination="@id/package_book_bottomSheet"
@@ -147,7 +153,20 @@
     <fragment
         android:id="@+id/review_fragment"
         android:name="com.webtechsolution.ghumantey.ui.review.ReviewFragment"
-        tools:layout="@layout/review_fragment"/>
+        tools:layout="@layout/review_fragment">
+        <argument
+            android:name="packageId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/package_review_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.packageReview.PackageReviewFragment"
+        tools:layout="@layout/package_review_fragment">
+        <argument
+            android:name="packageId"
+            app:argType="string" />
+    </fragment>
 
     <!--<dialog android:id="@+id/package_book_bottomSheet"
         android:name="com.webtechsolution.ghumantey.ui.packageBook.PackageBookBottomSheet"

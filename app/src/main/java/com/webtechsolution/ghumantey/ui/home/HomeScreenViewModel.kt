@@ -52,36 +52,8 @@ class HomeScreenViewModel @ViewModelInject constructor(private val apiInterface:
             .subscribeOn(Schedulers.io())
             .doOnSubscribe { _state.update { copy(loading = true) } }
             .flatMapCompletable {
-                println("destination======"+it)
                 Completable.fromAction { roomDB.destinationDao.insertPackage(it) }
             }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _state.update {
-                    copy(
-                        loading = false
-                    )
-                }
-            }, { throwable ->
-                println("Error====" + throwable.message)
-                _state.update {
-                    copy(
-                        loading = false,
-                        toast = SingleEvent("Server error")
-                    )
-                }
-            }).isDisposed
-    }
-
-    fun searchPackageApi(searchDestination: String) {
-        val searchBody:SearchBody = SearchBody(searchDestination)
-        apiInterface.getSearchPackages(searchBody)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe { _state.update { copy(loading = true) } }
-            /*.flatMapCompletable {
-           //     println("destination======"+it)
-            //    Completable.fromAction { roomDB.searchPackageDao.insertPackage(it) }
-            }*/
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _state.update {

@@ -30,7 +30,6 @@ class HomeScreenFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getDestinationList()
-       // ((activity as MainActivity).updateStatusBarColor())
     }
 
     override fun onCreateView(
@@ -72,7 +71,6 @@ class HomeScreenFragment : BaseFragment() {
         binding.searchButton.setOnClickListener {
             if (binding.icSearch.text.toString() != null){
                 findNavController().navigate(HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(binding.icSearch.text.toString()))
-                //viewModel.searchPackageApi(binding.icSearch.text.toString())
             }
         }
 

@@ -32,7 +32,7 @@ class SignInFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.appbarToolbar.apply {
-            appToolbar.apply {
+            toolbarApp.apply {
                 toolbarTitle.text = "Sign In "
                 NavigationUI.setupWithNavController(this, findNavController())
                 setNavigationIcon(R.drawable.ic_arrow_back)

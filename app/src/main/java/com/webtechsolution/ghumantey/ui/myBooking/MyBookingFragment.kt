@@ -39,8 +39,8 @@ class MyBookingFragment : BaseFragment() {
         viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
-        binding.appToolbar.apply {
-            appToolbar.apply {
+        binding.toolbarApp.apply {
+            toolbarApp.apply {
                 toolbarTitle.text = "My Booking "
                 NavigationUI.setupWithNavController(this, findNavController())
                 setNavigationIcon(R.drawable.ic_arrow_back)

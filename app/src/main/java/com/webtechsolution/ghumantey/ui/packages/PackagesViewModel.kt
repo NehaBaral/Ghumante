@@ -35,10 +35,6 @@ class DestinationViewModel @ViewModelInject constructor(private val apiInterface
         apiInterface.getSearchPackages(searchBody)
             .subscribeOn(Schedulers.io())
             .doOnSubscribe { _state.update { copy(loading = true) } }
-            /*.flatMapCompletable {
-           //     println("destination======"+it)
-            //    Completable.fromAction { roomDB.searchPackageDao.insertPackage(it) }
-            }*/
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _state.update {
@@ -56,48 +52,5 @@ class DestinationViewModel @ViewModelInject constructor(private val apiInterface
                     )
                 }
             }).isDisposed
-       /* roomDB.packageDao.getDestinationPackage(args.destinationId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { _state.update {copy(loading = true) } }
-            .subscribe({packagesList->
-                _state.update {
-                    copy(
-                        packagesList = packagesList
-                    )
-                }
-            },{throwable->
-                _state.update {
-                    copy(
-                        toast = SingleEvent("Database error")
-                    )
-                }
-            }).isDisposed*/
-
-        getServerDestination(args)
-    }
-
-    private fun getServerDestination(args: PackagesFragmentArgs) {
-        /*apiInterface.getDestinationPackages(args.destinationId)
-            .subscribeOn(Schedulers.io())
-            .doOnSubscribe { _state.update { copy(loading = true) } }
-            .flatMapCompletable {
-                Completable.fromAction { roomDB.packageDao.insertPackages(it) }
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _state.update {
-                    copy(
-                        loading = false
-                    )
-                }
-            },{throwable->
-                _state.update {
-                    copy(
-                        loading = false,
-                        toast = SingleEvent("Server error")
-                    )
-                }
-            }).isDisposed*/
     }
 }
