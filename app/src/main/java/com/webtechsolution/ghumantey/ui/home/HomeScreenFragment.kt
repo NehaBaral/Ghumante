@@ -61,10 +61,11 @@ class HomeScreenFragment : BaseFragment() {
                 findNavController().navigate(HomeScreenFragmentDirections.actionHomeScreenFragmentToMyProfileFragment())
             }
         }
+
         viewModel.state.observe(viewLifecycleOwner, Observer {uiState->
             if (uiState.loading) showLoadingDialog("Loading destination")
             else hideLoadingDialog()
-            uiState.toast.value?.let { toast(it) }
+            uiState.toast.value?.let{ toast(it) }
             adapter.submitList(uiState.destinationList)
         })
 

@@ -28,7 +28,7 @@ interface ApiInterface {
     @GET("Packages")
     fun getPackagesList():Single<PackagesList>
 
-    @POST("search")
+    @GET("search")
     fun getSearchPackages(
         @Body destination:SearchBody
     ):Single<SearchPackage>
@@ -45,4 +45,6 @@ interface ApiInterface {
     /*@GET("destination/{id}/packages")
     fun getDestinationPackages(@Path("id") destinationId:String):Single<PackagesModel>*/
 
+    @POST("users/signup")
+    fun userRegister(@Body signUpBody:SignUpBody):Single<SignUp>
 }

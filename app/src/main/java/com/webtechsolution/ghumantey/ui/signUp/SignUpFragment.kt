@@ -64,6 +64,9 @@ class SignUpFragment : BaseFragment() {
         viewModel.state.observe(viewLifecycleOwner, Observer {uiState->
             if (uiState.loadingDialog) showLoadingDialog("Signing you up")
             else hideLoadingDialog()
+            uiState.toast.value?.also {
+                toast(it)
+            }
             uiState.success.value?.let {
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
             }

@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.domain.SignUpBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
 import com.webtechsolution.ghumantey.helpers.set
@@ -21,28 +22,28 @@ class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterfac
     val state = _state as LiveData<SignUpState>
 
     fun userRegister(username: String, email: String, password: String){
-        /*apiInterface.userRegister(username,email,password)
+        val signupBody:SignUpBody = SignUpBody(username,password)
+        apiInterface.userRegister(signupBody)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }
-            .subscribe({
-                println("Register==="+it)
+            .subscribe({state->
                 _state.set {
                     it.copy(
                         loadingDialog = false,
-                        toast = SingleEvent("Sign up successful"),
+                        toast = SingleEvent(state.status),
                         success = Unit.toEvent()
                     )
                 }
             }, {
-                println("Failed====" + it.message)
+                it.message
                 _state.set {
                     it.copy(
                         loadingDialog = false,
                         toast = SingleEvent("Sign up failed")
                     )
                 }
-            }).isDisposed*/
+            }).isDisposed
     }
 
 }
