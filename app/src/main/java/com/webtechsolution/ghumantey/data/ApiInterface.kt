@@ -47,4 +47,13 @@ interface ApiInterface {
 
     @POST("users/signup")
     fun userRegister(@Body signUpBody:SignUpBody):Single<SignUp>
+
+    @POST("users/login")
+    fun userLogin(@Body signUpBody:SignUpBody):Single<Login>
+
+    @GET("agencyPackage")
+    fun getAgencyByPackage(@Header("Authorization") token:String):Single<AgencyPackage>
+
+    @POST("packages")
+    fun obtainPackagesList(@Header("Authorization") token:String,@Body postPackage:PostPackage):Single<PackagesList>
 }

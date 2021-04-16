@@ -22,7 +22,7 @@ class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterfac
     val state = _state as LiveData<SignUpState>
 
     fun userRegister(username: String, email: String, password: String){
-        val signupBody:SignUpBody = SignUpBody(username,password)
+        val signupBody:SignUpBody = SignUpBody(username,password,true)
         apiInterface.userRegister(signupBody)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

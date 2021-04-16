@@ -63,6 +63,7 @@ class HomeScreenViewModel @ViewModelInject constructor(private val apiInterface:
                 }
             }, { throwable ->
                 println("Error====" + throwable.message)
+                println("Errrr==="+throwable.printStackTrace())
                 _state.update {
                     copy(
                         loading = false,

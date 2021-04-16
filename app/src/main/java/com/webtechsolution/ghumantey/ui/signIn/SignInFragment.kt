@@ -1,7 +1,6 @@
 package com.webtechsolution.ghumantey.ui.signIn
 
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,8 +39,8 @@ class SignInFragment : BaseFragment() {
         }
         binding.apply {
             signInBtn.setOnClickListener {
-                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
-                /*val email = icEmail.text.toString()
+          //      findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                val email = icEmail.text.toString()
                 val password = icPassword.text.toString()
 
                 if (password.isBlank()) {
@@ -51,20 +50,26 @@ class SignInFragment : BaseFragment() {
                     icEmailField.error = "Please enter valid email"
                 }
                 if (email.isNotBlank() && password.isNotBlank()) {
-                    viewModel.userSignIn(email, password)
+                    val agencySwitch = binding.agencyPacSwitch.isChecked
+                    viewModel.userSignIn(email, password,agencySwitch)
                 } else {
                     icEmailField.error = "Please enter valid email"
                 }
                 viewModel.state.observe(viewLifecycleOwner, Observer { uiState ->
-                    if (uiState.loadingDialog) showLoadingDialog("Signing you up")
-                    else hideLoadingDialog()
+                    /*if (uiState.loadingDialog) showLoadingDialog("Signing you up")
+                    else hideLoadingDialog()*/
                     //uiState.toast.value.let { toast(it!!) }
                     binding.icEmail.error = uiState.emailError
                     binding.icPassword.error = uiState.passwordError
                     uiState.success.value?.let {
-                        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                        //hideLoadingDialog()
+                        if (!uiState.signInResponse?.agency!!){
+                            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                        }else{
+                            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToAgencyHomeFragment(uiState.signInResponse.token))
+                        }
                     }
-                })*/
+                })
             }
 
             binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }.isDisposed

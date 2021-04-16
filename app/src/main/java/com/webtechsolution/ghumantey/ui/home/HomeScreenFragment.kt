@@ -63,8 +63,8 @@ class HomeScreenFragment : BaseFragment() {
         }
 
         viewModel.state.observe(viewLifecycleOwner, Observer {uiState->
-            if (uiState.loading) showLoadingDialog("Loading destination")
-            else hideLoadingDialog()
+           /* if (uiState.loading) showLoadingDialog("Loading destination")
+            else hideLoadingDialog()*/
             uiState.toast.value?.let{ toast(it) }
             adapter.submitList(uiState.destinationList)
         })

@@ -4,6 +4,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.domain.Login
+import com.webtechsolution.ghumantey.data.domain.SignUpBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
 import com.webtechsolution.ghumantey.helpers.set
@@ -16,13 +18,15 @@ data class SignInUiState(
     val emailError: String? = null,
     val passwordError: String? = null,
     val toast: SingleEvent<String> = SingleEvent(),
-    val success: SingleEvent<Unit> = SingleEvent()
+    val success: SingleEvent<Unit> = SingleEvent(),
+    val signInResponse: Login?=null
 )
 class SignInViewModel @ViewModelInject constructor(private val apiInterface: ApiInterface) : BaseViewModel() {
     private val _state = MutableLiveData(SignInUiState())
     val state = _state as LiveData<SignInUiState>
-    fun userSignIn(email: String, password: String) {
-       /* apiInterface.userLogin(email,password)
+    fun userSignIn(username: String, password: String, agencySwitch: Boolean) {
+        val loginBody:SignUpBody = SignUpBody(username,password,agencySwitch)
+        apiInterface.userLogin(loginBody)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }
@@ -31,7 +35,8 @@ class SignInViewModel @ViewModelInject constructor(private val apiInterface: Api
                     state.copy(
                         toast = SingleEvent("Login Successful"),
                         loadingDialog = false,
-                        success = Unit.toEvent()
+                        success = Unit.toEvent(),
+                        signInResponse = loginResponse
                     )
                 }
             }, {throwable->
@@ -42,7 +47,7 @@ class SignInViewModel @ViewModelInject constructor(private val apiInterface: Api
                         toast = SingleEvent("Login Failed"),
                     )
                 }
-            }).isDisposed*/
+            }).isDisposed
 
     }
 }
