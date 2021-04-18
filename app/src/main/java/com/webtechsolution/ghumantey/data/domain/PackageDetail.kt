@@ -1,13 +1,11 @@
 package com.webtechsolution.ghumantey.data.domain
 
-class SearchPackage : ArrayList<SearchPackageItem>()
-
-data class SearchPackageItem(
+data class PackageDetail(
     val __v: Int,
     val _id: String,
-    val agency: String,
-    val bookings: List<BookingPackageItem>,
-    val comments: List<CommentItem>,
+    val agency: Agency,
+    val bookings: List<Any>,
+    val comments: List<Any>,
     val createdAt: String,
     val description: String,
     val destination: String,

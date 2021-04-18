@@ -21,8 +21,8 @@ class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterfac
     private val _state = MutableLiveData(SignUpState())
     val state = _state as LiveData<SignUpState>
 
-    fun userRegister(username: String, email: String, password: String){
-        val signupBody:SignUpBody = SignUpBody(username,password,true)
+    fun userRegister(username: String, password: String, agency: Boolean){
+        val signupBody:SignUpBody = SignUpBody(username,password,agency)
         apiInterface.userRegister(signupBody)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

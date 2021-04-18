@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
 import com.webtechsolution.ghumantey.data.RoomDB
+import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.data.domain.SearchBody
 import com.webtechsolution.ghumantey.data.domain.SearchPackageItem
 import com.webtechsolution.ghumantey.data.model.PackagesModelItem

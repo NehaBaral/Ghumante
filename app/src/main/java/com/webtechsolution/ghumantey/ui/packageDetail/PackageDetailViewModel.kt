@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.domain.PackageDetail
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.data.model.DestinationModel
 import com.webtechsolution.ghumantey.helpers.SingleEvent
@@ -14,7 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 data class PackageDetailUiState(
-    val packageDetail: PackagesListItem? = null,
+    val packageDetail: PackageDetail? = null,
     val loading: Boolean = false,
     val showError: Boolean = false,
     val toast: SingleEvent<String> = SingleEvent()

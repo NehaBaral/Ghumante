@@ -23,7 +23,7 @@
         <item name="android:background">@drawable/bg_bottom_sheet</item>
     </style>
 
-    <style name="BottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="@style/Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">true</item>
         <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>

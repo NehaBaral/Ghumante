@@ -1,9 +1,14 @@
 package com.webtechsolution.ghumantey.data.domain
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 class AgencyPackage : ArrayList<AgencyPackageItem>()
 
+@Entity
 data class AgencyPackageItem(
     val __v: Int,
+    @PrimaryKey
     val _id: String,
     val agency: Agency,
     val bookings: List<BookingPackageItem>,
@@ -28,6 +33,6 @@ data class Agency(
     val agency: Boolean,
     val firstname: String,
     val lastname: String,
-    val myBookings: List<Any>,
+    val myBookings: List<BookingPackageItem>,
     val username: String
 )

@@ -47,6 +47,15 @@ class AgencyHomeFragment : BaseFragment() {
                 toolbarApp.apply {
                     NavigationUI.setupWithNavController(this, findNavController())
                     setNavigationIcon(R.drawable.ic_arrow_back)
+                    inflateMenu(R.menu.booked_package)
+                    setOnMenuItemClickListener {
+                        when(it.itemId){
+                            R.id.booked_package ->{
+                                findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToAgencyBookingFragment())
+                            }
+                        }
+                        true
+                    }
                 }
         }
 

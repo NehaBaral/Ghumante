@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.data.model.DestinationModel
 import com.webtechsolution.ghumantey.databinding.MyBookingRvBinding
 import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
 @FragmentScoped
-class MyBookingAdapter @Inject constructor() : ListAdapter<DestinationModel,MyBookingAdapter.MyBookingViewHolder>(MyBookingDiff()) {
+class MyBookingAdapter @Inject constructor() : ListAdapter<AgencyPackageItem,MyBookingAdapter.MyBookingViewHolder>(MyBookingDiff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyBookingViewHolder {
         return MyBookingViewHolder(MyBookingRvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -22,17 +23,17 @@ class MyBookingAdapter @Inject constructor() : ListAdapter<DestinationModel,MyBo
     }
 
     class MyBookingViewHolder(val binding:MyBookingRvBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DestinationModel?) {
+        fun bind(item: AgencyPackageItem?) {
 
         }
     }
 
 }
 
-class MyBookingDiff : DiffUtil.ItemCallback<DestinationModel>() {
-    override fun areItemsTheSame(oldItem: DestinationModel, newItem: DestinationModel) = oldItem == newItem
+class MyBookingDiff : DiffUtil.ItemCallback<AgencyPackageItem>() {
+    override fun areItemsTheSame(oldItem: AgencyPackageItem, newItem: AgencyPackageItem) = oldItem == newItem
 
-    override fun areContentsTheSame(oldItem: DestinationModel, newItem: DestinationModel) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: AgencyPackageItem, newItem: AgencyPackageItem) = oldItem == newItem
 
-    override fun getChangePayload(oldItem: DestinationModel, newItem: DestinationModel) = Unit
+    override fun getChangePayload(oldItem: AgencyPackageItem, newItem: AgencyPackageItem) = Unit
 }

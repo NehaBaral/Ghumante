@@ -38,6 +38,7 @@ class AddPackageViewModel @ViewModelInject constructor(val apiInterface: ApiInte
                     it.copy(packageList = packageList,toast = SingleEvent("Package list updated"),success = Unit.toEvent())
                 }
             },{
+                it.message
                 _state.set {
                     it.copy(toast = SingleEvent("Updated failed"),success = Unit.toEvent())
                 }

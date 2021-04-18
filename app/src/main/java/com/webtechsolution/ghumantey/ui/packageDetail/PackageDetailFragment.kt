@@ -12,8 +12,10 @@ import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackageDetailFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
+import com.webtechsolution.ghumantey.ui.packageBook.PackageBookBottomSheet
 import com.webtechsolution.ghumantey.ui.packageDetail.adapter.IternaryAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,6 +41,7 @@ class PackageDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.bookNowBtn.setOnClickListener {
+            PackageBookBottomSheet().show(childFragmentManager, UUID.randomUUID().toString())
             //findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet())
         }
 
@@ -47,6 +50,11 @@ class PackageDetailFragment : BaseFragment() {
                 binding.packageAmount.text = item?.price.toString()
                 binding.packageDesc.text = item?.description.toString()
                 binding.packageDays.text = item?.updatedAt
+                binding.excludedRv.text = item?.excluded
+                binding.includedRv.text = item?.included
+                binding.includedRv.text = item?.iternaries
+                binding.contactNumber.text = item?.phone.toString()
+                binding.contactEmail.text = item?.email
             }
         })
       /*  binding.appToolbar.apply {
@@ -56,7 +64,7 @@ class PackageDetailFragment : BaseFragment() {
         }*/
 
         binding.writeReviewBtn.setOnClickListener {
-            findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToReviewFragment(args.packageId))
+            findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToReviewFragment(args.packageId,""))
         }
 
         binding.reviewList.setOnClickListener {

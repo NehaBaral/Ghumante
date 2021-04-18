@@ -7,13 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.hilt.lifecycle.ViewModelInject
 import com.webtechsolution.ghumantey.databinding.PackageBookBottomsheetBinding
-import com.webtechsolution.ghumantey.helpers.base.BaseBottonSheet
+import com.webtechsolution.ghumantey.helpers.base.BaseBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-/*
-@AndroidEntryPoint
-class PackageBookBottomSheet : BaseBottonSheet() {
+class PackageBookBottomSheet : BaseBottomSheet() {
 
     private val viewModel by viewModels<PackageBookViewModel>()
     lateinit var binding:PackageBookBottomsheetBinding
@@ -30,4 +28,4 @@ class PackageBookBottomSheet : BaseBottonSheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-}*/
+}

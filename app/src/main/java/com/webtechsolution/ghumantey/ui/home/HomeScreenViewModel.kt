@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
 import com.webtechsolution.ghumantey.data.RoomDB
+import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.data.domain.SearchBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
@@ -16,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 data class destinationUiState(
-    val destinationList: List<PackagesListItem> = emptyList(),
+    val destinationList: List<AgencyPackageItem> = emptyList(),
     val loading: Boolean = false,
     val showError: Boolean = false,
     val toast: SingleEvent<String> = SingleEvent()

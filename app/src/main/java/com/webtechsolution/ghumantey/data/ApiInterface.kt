@@ -26,15 +26,13 @@ interface ApiInterface {
     ):Single<Auth>*/
 
     @GET("Packages")
-    fun getPackagesList():Single<PackagesList>
+    fun getPackagesList():Single<AgencyPackage>
 
-    @GET("search")
-    fun getSearchPackages(
-        @Body destination:SearchBody
-    ):Single<SearchPackage>
+    @POST("search")
+    fun getSearchPackages(@Body destination:SearchBody):Single<SearchPackage>
 
     @GET("packages/{id}")
-    fun getPackageDetail(@Path("id") packageId:String):Single<PackagesListItem>
+    fun getPackageDetail(@Path("id") packageId:String):Single<PackageDetail>
 
     @POST("packages/{id}/comments")
     fun postComment(@Path("id") packageId:String,@Body commentBody:CommentBody):Single<PackagesListItem>
@@ -56,4 +54,7 @@ interface ApiInterface {
 
     @POST("packages")
     fun obtainPackagesList(@Header("Authorization") token:String,@Body postPackage:PostPackage):Single<PackagesList>
+
+    @GET("")
+    fun getBookingPackage(@Header("Authorization") token: String ):Single<AgencyPackage>
 }

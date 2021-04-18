@@ -23,6 +23,10 @@ class MyBookingFragment : BaseFragment() {
     @Inject
     lateinit var adapter:MyBookingAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getBookingPackage("")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +41,7 @@ class MyBookingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.myBookingRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            adapter.submitList(it.myBookingList)
         })
         binding.toolbarApp.apply {
             toolbarApp.apply {

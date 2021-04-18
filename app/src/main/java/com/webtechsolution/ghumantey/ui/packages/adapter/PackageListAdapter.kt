@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.view.clicks
+import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.data.domain.SearchPackageItem
 import com.webtechsolution.ghumantey.data.model.DestinationModel
 import com.webtechsolution.ghumantey.data.model.PackagesModelItem

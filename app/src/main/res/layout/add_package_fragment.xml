@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -123,14 +123,14 @@
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
 
-    <TextView
-        android:id="@+id/destination_excluded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iternaries"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp" />
+        <TextView
+            android:id="@+id/destination_excluded"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Excluded"
+            android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/ic_destination_excluded"
@@ -163,7 +163,7 @@
         android:id="@+id/destination_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iternaries"
+        android:text="Email"
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp"
         android:layout_marginStart="8dp" />
@@ -182,7 +182,7 @@
             android:id="@+id/submit_package_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iternaries"
+            android:text="Submit"
             android:background="@drawable/edittext_bg"
             android:padding="20dp"
             android:textAlignment="center"
