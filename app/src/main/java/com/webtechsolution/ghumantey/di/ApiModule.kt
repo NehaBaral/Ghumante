@@ -7,7 +7,7 @@ import com.webtechsolution.ghumantey.data.Preferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -20,7 +20,7 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 class ApiModule {
     @Singleton
@@ -60,7 +60,7 @@ class ApiModule {
         val original: Request = it.request()
         val builder: Request.Builder = original.newBuilder().method(original.method, original.body)
         builder.header("Accept", "application/json")
-       // preferences.token?.let { token -> builder.header("Authorization", "Bearer $token") }
+        // preferences.token?.let { token -> builder.header("Authorization", "Bearer $token") }
         it.proceed(builder.build())
     }
 

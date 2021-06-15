@@ -1,13 +1,8 @@
 package com.webtechsolution.ghumantey.data
 
 import com.webtechsolution.ghumantey.data.domain.*
-import com.webtechsolution.ghumantey.data.model.Auth
-import com.webtechsolution.ghumantey.data.model.DestinationList
-import com.webtechsolution.ghumantey.data.model.PackagesModel
-import com.webtechsolution.ghumantey.data.model.Register
 import io.reactivex.Single
 import retrofit2.http.*
-import java.io.StringReader
 
 interface ApiInterface {
     /*@FormUrlEncoded
@@ -26,35 +21,41 @@ interface ApiInterface {
     ):Single<Auth>*/
 
     @GET("Packages")
-    fun getPackagesList():Single<AgencyPackage>
+    fun getPackagesList(): Single<AgencyPackage>
 
     @POST("search")
-    fun getSearchPackages(@Body destination:SearchBody):Single<SearchPackage>
+    fun getSearchPackages(@Body destination: SearchBody): Single<SearchPackage>
 
     @GET("packages/{id}")
-    fun getPackageDetail(@Path("id") packageId:String):Single<PackageDetail>
+    fun getPackageDetail(@Path("id") packageId: String): Single<PackageDetail>
 
     @POST("packages/{id}/comments")
-    fun postComment(@Path("id") packageId:String,@Body commentBody:CommentBody):Single<PackagesListItem>
+    fun postComment(
+        @Path("id") packageId: String,
+        @Body commentBody: CommentBody
+    ): Single<PackagesListItem>
 
     @GET("packages/{id}/comments")
-    fun getCommentList(@Path("id") packageId:String):Single<PackagesListItem>
+    fun getCommentList(@Path("id") packageId: String): Single<PackagesListItem>
 
     /*@GET("destination/{id}/packages")
     fun getDestinationPackages(@Path("id") destinationId:String):Single<PackagesModel>*/
 
     @POST("users/signup")
-    fun userRegister(@Body signUpBody:SignUpBody):Single<SignUp>
+    fun userRegister(@Body signUpBody: SignUpBody): Single<SignUp>
 
     @POST("users/login")
-    fun userLogin(@Body signUpBody:SignUpBody):Single<Login>
+    fun userLogin(@Body signUpBody: SignUpBody): Single<Login>
 
     @GET("agencyPackage")
-    fun getAgencyByPackage(@Header("Authorization") token:String):Single<AgencyPackage>
+    fun getAgencyByPackage(@Header("Authorization") token: String): Single<AgencyPackage>
 
     @POST("packages")
-    fun obtainPackagesList(@Header("Authorization") token:String,@Body postPackage:PostPackage):Single<PackagesList>
+    fun obtainPackagesList(
+        @Header("Authorization") token: String,
+        @Body postPackage: PostPackage
+    ): Single<PackagesList>
 
     @GET("")
-    fun getBookingPackage(@Header("Authorization") token: String ):Single<AgencyPackage>
+    fun getBookingPackage(@Header("Authorization") token: String): Single<AgencyPackage>
 }

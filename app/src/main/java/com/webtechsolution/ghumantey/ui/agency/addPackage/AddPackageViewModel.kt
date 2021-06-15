@@ -1,6 +1,5 @@
 package com.webtechsolution.ghumantey.ui.agency.addPackage
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -10,16 +9,19 @@ import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
 import com.webtechsolution.ghumantey.helpers.set
 import com.webtechsolution.ghumantey.helpers.toEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 data class AddPackageUiState(
-    val toast:SingleEvent<String> = SingleEvent(),
-    val packageList:PackagesList? = null,
-    val success:SingleEvent<Unit> = SingleEvent()
+    val toast: SingleEvent<String> = SingleEvent(),
+    val packageList: PackagesList? = null,
+    val success: SingleEvent<Unit> = SingleEvent()
 )
 
-class AddPackageViewModel @ViewModelInject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
+@HiltViewModel
+class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
     private val _state = MutableLiveData(AddPackageUiState())
     val state = _state as LiveData<AddPackageUiState>
     fun updateNewPackageDetail(
@@ -28,19 +30,32 @@ class AddPackageViewModel @ViewModelInject constructor(val apiInterface: ApiInte
         destinationDesc: String, destinationIternary: String, destinationIncluded: String,
         destinationExcluded: String, destinationPhone: Long, destinationEmail: String
     ) {
-        val postPackage:PostPackage = PostPackage(destinationDesc,destinationName,destinationEmail,
-        destinationExcluded,destinationIncluded,destinationIternary,packageName,destinationPhone,packagePrice)
-        apiInterface.obtainPackagesList("Bearer "+token,postPackage)
+        val postPackage: PostPackage = PostPackage(
+            destinationDesc,
+            destinationName,
+            destinationEmail,
+            destinationExcluded,
+            destinationIncluded,
+            destinationIternary,
+            packageName,
+            destinationPhone,
+            packagePrice
+        )
+        apiInterface.obtainPackagesList("Bearer " + token, postPackage)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({packageList->
+            .subscribe({ packageList ->
                 _state.set {
-                    it.copy(packageList = packageList,toast = SingleEvent("Package list updated"),success = Unit.toEvent())
+                    it.copy(
+                        packageList = packageList,
+                        toast = SingleEvent("Package list updated"),
+                        success = Unit.toEvent()
+                    )
                 }
-            },{
+            }, {
                 it.message
                 _state.set {
-                    it.copy(toast = SingleEvent("Updated failed"),success = Unit.toEvent())
+                    it.copy(toast = SingleEvent("Updated failed"), success = Unit.toEvent())
                 }
             }).isDisposed
 

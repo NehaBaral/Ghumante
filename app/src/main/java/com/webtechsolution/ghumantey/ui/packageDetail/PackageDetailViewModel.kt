@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.packageDetail
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -20,7 +21,8 @@ data class PackageDetailUiState(
     val showError: Boolean = false,
     val toast: SingleEvent<String> = SingleEvent()
 )
-class PackageDetailViewModel @ViewModelInject constructor(val apiInterface: ApiInterface)  : BaseViewModel() {
+@HiltViewModel
+class PackageDetailViewModel @Inject constructor(val apiInterface: ApiInterface)  : BaseViewModel() {
     private val _pState = MutableLiveData(PackageDetailUiState())
     val pState = _pState as LiveData<PackageDetailUiState>
     init {

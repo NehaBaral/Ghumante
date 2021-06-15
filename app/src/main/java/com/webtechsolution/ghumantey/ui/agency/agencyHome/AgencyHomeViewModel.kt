@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.agency.agencyHome
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -16,7 +17,8 @@ data class AgencyHomeUiState(
     val toast:SingleEvent<String> = SingleEvent(),
     val agencyPackageList:List<AgencyPackageItem> = emptyList()
 )
-class AgencyHomeViewModel @ViewModelInject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
+@HiltViewModel
+class AgencyHomeViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
     private val _state = MutableLiveData(AgencyHomeUiState())
     val state = _state as LiveData<AgencyHomeUiState>
 

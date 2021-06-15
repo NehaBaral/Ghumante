@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.myBooking
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -17,7 +18,8 @@ data class MyBookingUiState(
     val myBookingList:List<AgencyPackageItem> = emptyList()
 )
 
-class MyBookingViewModel @ViewModelInject constructor(val apiInterface: ApiInterface) :
+@HiltViewModel
+class MyBookingViewModel @Inject constructor(val apiInterface: ApiInterface) :
     BaseViewModel() {
 
     /*private val _state = MutableLiveData(listOf(

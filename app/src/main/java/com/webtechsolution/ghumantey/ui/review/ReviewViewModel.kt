@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.review
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -18,7 +19,8 @@ data class ReviewUiState(
     val toast: SingleEvent<String> = SingleEvent(),
     val reviewSuccess:Boolean = false
 )
-class ReviewViewModel @ViewModelInject constructor(val apiInterface:ApiInterface) : BaseViewModel() {
+@HiltViewModel
+class ReviewViewModel @Inject constructor(val apiInterface:ApiInterface) : BaseViewModel() {
 
     private val  _state = MutableLiveData(ReviewUiState())
     val state = _state as LiveData<ReviewUiState>

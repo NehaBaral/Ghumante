@@ -1,7 +1,9 @@
 package com.webtechsolution.ghumantey.ui.myProfile
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
 
-class MyProfileViewModel @ViewModelInject constructor() : BaseViewModel() {
+@HiltViewModel
+class MyProfileViewModel @Inject constructor() : BaseViewModel() {
 }

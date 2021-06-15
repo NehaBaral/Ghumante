@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.profileEdit
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
@@ -11,7 +12,8 @@ data class ProfileUiState(
     val email:String?=null
 )
 
-class ProfileEditViewModel @ViewModelInject constructor() : BaseViewModel() {
+@HiltViewModel
+class ProfileEditViewModel @Inject constructor() : BaseViewModel() {
     private val _state = MutableLiveData<ProfileUiState>()
     val state= _state as LiveData<ProfileUiState>
     fun setImage(image: String) {

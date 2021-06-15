@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.signIn
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -21,7 +22,8 @@ data class SignInUiState(
     val success: SingleEvent<Unit> = SingleEvent(),
     val signInResponse: Login?=null
 )
-class SignInViewModel @ViewModelInject constructor(private val apiInterface: ApiInterface) : BaseViewModel() {
+@HiltViewModel
+class SignInViewModel @Inject constructor(private val apiInterface: ApiInterface) : BaseViewModel() {
     private val _state = MutableLiveData(SignInUiState())
     val state = _state as LiveData<SignInUiState>
     fun userSignIn(username: String, password: String, agencySwitch: Boolean) {

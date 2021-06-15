@@ -1,6 +1,5 @@
 package com.webtechsolution.ghumantey.app
 
-import com.mlsdev.rximagepicker.BuildConfig.APPLICATION_ID
 import com.webtechsolution.ghumantey.BuildConfig
 
 object Config {

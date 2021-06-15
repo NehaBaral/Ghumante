@@ -1,13 +1,5 @@
 package com.webtechsolution.ghumantey.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.webtechsolution.ghumantey.data.domain.SearchPackageItem
-import com.webtechsolution.ghumantey.data.model.PackagesModelItem
-import io.reactivex.Flowable
-
 /*@Dao
 abstract class SearchPackagesDao {
     @Query("SELECT * FROM SearchPackageItem")

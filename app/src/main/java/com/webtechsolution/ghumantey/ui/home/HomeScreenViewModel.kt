@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.home
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -22,7 +23,8 @@ data class destinationUiState(
     val showError: Boolean = false,
     val toast: SingleEvent<String> = SingleEvent()
 )
-class HomeScreenViewModel @ViewModelInject constructor(private val apiInterface: ApiInterface,private val roomDB: RoomDB) : BaseViewModel() {
+@HiltViewModel
+class HomeScreenViewModel @Inject constructor(private val apiInterface: ApiInterface,private val roomDB: RoomDB) : BaseViewModel() {
     private val _state = MutableLiveData(destinationUiState())
     val state = _state as LiveData<destinationUiState>
     fun getDestinationList() {

@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.signUp
 
-import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
@@ -17,7 +18,8 @@ data class SignUpState(
     val toast: SingleEvent<String> = SingleEvent(),
     val success: SingleEvent<Unit> = SingleEvent()
 )
-class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
     private val _state = MutableLiveData(SignUpState())
     val state = _state as LiveData<SignUpState>
 
