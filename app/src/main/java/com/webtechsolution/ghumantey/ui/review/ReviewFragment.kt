@@ -38,7 +38,7 @@ class ReviewFragment : BaseFragment() {
         }
 
         viewModel.state.observe(viewLifecycleOwner, Observer {
-            toast(it.toast.toString())
+            toast(it.toast.value.toString())
             if (it.reviewSuccess){
                 hideLoadingDialog()
                 findNavController().popBackStack()

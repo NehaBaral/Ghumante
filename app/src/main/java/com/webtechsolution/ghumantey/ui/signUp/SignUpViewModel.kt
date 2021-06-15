@@ -27,7 +27,7 @@ class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterfac
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }
-            .subscribe({state->
+            .subscribe({ state ->
                 _state.set {
                     it.copy(
                         loadingDialog = false,
@@ -36,7 +36,7 @@ class SignUpViewModel @ViewModelInject constructor(val apiInterface: ApiInterfac
                     )
                 }
             }, {
-                it.message
+                println("error==="+it.message)
                 _state.set {
                     it.copy(
                         loadingDialog = false,

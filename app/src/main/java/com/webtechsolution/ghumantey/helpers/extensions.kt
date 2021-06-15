@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.helpers
 
 import android.app.Activity
+import android.content.res.Resources
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import com.google.gson.reflect.TypeToken
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import kotlin.math.roundToInt
 
 fun Fragment.hideKeyBoard() {
     val imm: InputMethodManager = requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -62,3 +64,29 @@ data class ServerError(val message: String)
 val gson = Gson()
 fun <T> T.toJson(): String = gson.toJson(this)
 inline fun <reified T> String.to(): T = gson.fromJson(this, object : TypeToken<T>() {}.type)
+
+fun Number.dpToPx(): Int {
+    return (Resources.getSystem().displayMetrics.density * this.toFloat()).roundToInt()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

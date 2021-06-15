@@ -8,7 +8,7 @@ object Config {
     const val okHttpReadTimeOut: Long = 60
     const val okHttpConnectionTimeOut: Long = 30
     const val okHttpWriteTimeOut: Long = 30
-    const val baseUrl: String = "http://192.168.0.102:3000/"
+    const val baseUrl: String = "http://192.168.1.164:3000/"
 
     const val DATABASE_NAME = "${BuildConfig.APPLICATION_ID}.room.db"
     const val DATABASE_VERSION = 1

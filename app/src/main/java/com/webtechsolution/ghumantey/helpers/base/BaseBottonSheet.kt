@@ -10,6 +10,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.webtechsolution.ghumantey.R
+import com.webtechsolution.ghumantey.helpers.dpToPx
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -49,8 +50,4 @@ open class BaseBottomSheet : BottomSheetDialogFragment(), DisposableContainer {
     override fun add(d: Disposable) = disposeBag.add(d)
     override fun remove(d: Disposable) = disposeBag.remove(d)
     override fun delete(d: Disposable) = disposeBag.delete(d)
-}
-
-fun Number.dpToPx(): Int {
-    return (Resources.getSystem().displayMetrics.density * this.toFloat()).roundToInt()
 }
