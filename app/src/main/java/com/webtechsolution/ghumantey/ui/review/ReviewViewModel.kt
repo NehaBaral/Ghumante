@@ -27,7 +27,7 @@ class ReviewViewModel @Inject constructor(val apiInterface:ApiInterface,val pref
     val state = _state as LiveData<ReviewUiState>
 
     fun postReview(review: String, rating: Float, args: ReviewFragmentArgs) {
-        val commentBody:CommentBody = CommentBody("nehaaaa",review,rating.toInt())
+        val commentBody:CommentBody = CommentBody(review,rating.toInt())
         val token = preference.authInfo?.token!!
         apiInterface.postComment("Bearer $token",args.packageId,commentBody)
             .subscribeOn(Schedulers.io())
