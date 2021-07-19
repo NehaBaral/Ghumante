@@ -5,7 +5,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash_screen_bg"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.textview.MaterialTextView
@@ -13,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ghumantey"
-            android:textColor="@android:color/white"
+            android:textColor="@color/purple_500"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

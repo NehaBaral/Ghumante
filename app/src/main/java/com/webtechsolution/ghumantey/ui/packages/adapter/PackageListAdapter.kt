@@ -34,9 +34,9 @@ class PackageListAdapter @Inject constructor() :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchPackageItem) {
             binding.packageName.text = item.name
-            binding.packageAmount.text = item.price.toString()
+            binding.packageAmount.text = "Rs ${item.price.toString()}"
             //  binding.packageDays.text = item
-            binding.packageCompany.text = item.agency
+            //binding.packageCompany.text = item.agency.firstname
             binding.root.clicks().map { item }.subscribe(clickRelay)
         }
     }

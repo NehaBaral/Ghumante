@@ -7,8 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
 import com.webtechsolution.ghumantey.data.RoomDB
 import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
-import com.webtechsolution.ghumantey.data.domain.PackagesListItem
-import com.webtechsolution.ghumantey.data.domain.SearchBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
 import com.webtechsolution.ghumantey.helpers.set
@@ -17,7 +15,7 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-data class destinationUiState(
+data class DestinationUiState(
     val destinationList: List<AgencyPackageItem> = emptyList(),
     val loading: Boolean = false,
     val showError: Boolean = false,
@@ -25,8 +23,8 @@ data class destinationUiState(
 )
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(private val apiInterface: ApiInterface,private val roomDB: RoomDB) : BaseViewModel() {
-    private val _state = MutableLiveData(destinationUiState())
-    val state = _state as LiveData<destinationUiState>
+    private val _state = MutableLiveData(DestinationUiState())
+    val state = _state as LiveData<DestinationUiState>
     fun getDestinationList() {
         roomDB.destinationDao.getAllPackages()
             .subscribeOn(Schedulers.io())
@@ -35,7 +33,7 @@ class HomeScreenViewModel @Inject constructor(private val apiInterface: ApiInter
             .subscribe({destinationList->
                 _state.update {
                     copy(
-                        destinationList = destinationList
+                        destinationList = destinationList.distinctBy { it.destination }
                     )
                 }
             },{throwable->

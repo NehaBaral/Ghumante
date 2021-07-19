@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.view.clicks
 import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
-import com.webtechsolution.ghumantey.data.domain.PackagesListItem
-import com.webtechsolution.ghumantey.data.model.Data
-import com.webtechsolution.ghumantey.data.model.DestinationModel
 import com.webtechsolution.ghumantey.databinding.DestinationRvBinding
 import dagger.hilt.android.scopes.FragmentScoped
 import io.reactivex.subjects.PublishSubject
@@ -29,8 +26,7 @@ class DestinationAdapter @Inject constructor() : ListAdapter<AgencyPackageItem, 
 
     class DestinationViewHolder(private val clickRelay: PublishSubject<AgencyPackageItem>,val binding:DestinationRvBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AgencyPackageItem) {
-            binding.destinationName.text = item.name
-            binding.destinationAddress.text = item.agency.username
+            binding.destinationName.text = item.destination
             binding.root.clicks().map { item }.subscribe(clickRelay)
         }
     }

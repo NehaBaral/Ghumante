@@ -32,24 +32,19 @@ fun <T> MutableLiveData<T>.update(modifier: T.() -> T) {
         value = modifier(data)
     }
 }
-inline fun <reified T> Throwable.handle(errorExtractor: T.() -> Error): Error {
+fun Throwable.handle(): Error {
     try {
         when (this) {
             is SocketTimeoutException -> return HandledError("Couldn't reach server")
             is HttpException -> {
                 val errorType = if (code() == 401) ErrorType.UnAuth else ErrorType.OTHER
-                if (errorType == ErrorType.UnAuth)
-                    return HandledError("Un Auth", ErrorType.UnAuth)
-
+                if (errorType == ErrorType.UnAuth) {
+                    return HandledError("You are not logged in", ErrorType.UnAuth)
+                }
                 return response()?.let { response ->
                     val message = response.errorBody()!!.string()
-                    try {
-                        errorExtractor(message.to<T>())
-                    } catch (e: Exception) {
-                        HandledError(message.to<ServerError>().message, errorType)
-                    }
+                    HandledError(message.to<ServerError>().message, errorType)
                 } ?: HandledError("Something went wrong", errorType)
-
             }
             is ConnectException -> return HandledError("Couldn't reach server")
             else -> return HandledError("Something went wrong")

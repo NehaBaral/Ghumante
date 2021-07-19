@@ -5,6 +5,7 @@ import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.Preferences
 import com.webtechsolution.ghumantey.data.domain.Login
 import com.webtechsolution.ghumantey.data.domain.SignUpBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
@@ -23,7 +24,8 @@ data class SignInUiState(
     val signInResponse: Login?=null
 )
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val apiInterface: ApiInterface) : BaseViewModel() {
+class SignInViewModel @Inject constructor(private val apiInterface: ApiInterface
+,private val preference:Preferences) : BaseViewModel() {
     private val _state = MutableLiveData(SignInUiState())
     val state = _state as LiveData<SignInUiState>
     fun userSignIn(username: String, password: String, agencySwitch: Boolean) {
@@ -33,6 +35,7 @@ class SignInViewModel @Inject constructor(private val apiInterface: ApiInterface
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.set { it.copy(loadingDialog = true) } }
             .subscribe({ loginResponse ->
+                preference.authInfo = loginResponse
                 _state.set { state ->
                     state.copy(
                         toast = SingleEvent("Login Successful"),

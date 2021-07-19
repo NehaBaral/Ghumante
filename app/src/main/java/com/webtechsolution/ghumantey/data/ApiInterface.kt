@@ -31,6 +31,7 @@ interface ApiInterface {
 
     @POST("packages/{id}/comments")
     fun postComment(
+        @Header("Authorization") token: String,
         @Path("id") packageId: String,
         @Body commentBody: CommentBody
     ): Single<PackagesListItem>
@@ -58,4 +59,11 @@ interface ApiInterface {
 
     @GET("")
     fun getBookingPackage(@Header("Authorization") token: String): Single<AgencyPackage>
+
+    @POST("packages/{id}/bookings")
+    fun bookPackage(
+        @Header("Authorization") token: String,
+        @Path("id") packageId: String,
+        @Body packages: BookPackageBody
+    ): Single<PackagesListItem>
 }

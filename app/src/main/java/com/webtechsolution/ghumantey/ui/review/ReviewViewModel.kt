@@ -5,6 +5,7 @@ import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.Preferences
 import com.webtechsolution.ghumantey.data.domain.CommentBody
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
@@ -20,14 +21,15 @@ data class ReviewUiState(
     val reviewSuccess:Boolean = false
 )
 @HiltViewModel
-class ReviewViewModel @Inject constructor(val apiInterface:ApiInterface) : BaseViewModel() {
+class ReviewViewModel @Inject constructor(val apiInterface:ApiInterface,val preference:Preferences) : BaseViewModel() {
 
     private val  _state = MutableLiveData(ReviewUiState())
     val state = _state as LiveData<ReviewUiState>
 
     fun postReview(review: String, rating: Float, args: ReviewFragmentArgs) {
-        val commentBody:CommentBody = CommentBody("Neha",review,rating.toInt())
-        apiInterface.postComment(args.packageId,commentBody)
+        val commentBody:CommentBody = CommentBody("nehaaaa",review,rating.toInt())
+        val token = preference.authInfo?.token!!
+        apiInterface.postComment("Bearer $token",args.packageId,commentBody)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
@@ -37,6 +39,8 @@ class ReviewViewModel @Inject constructor(val apiInterface:ApiInterface) : BaseV
                     )
                 }
             },{
+                println("error=="+it.message)
+                it.printStackTrace()
                 _state.update {
                     copy(
                         reviewSuccess = true,

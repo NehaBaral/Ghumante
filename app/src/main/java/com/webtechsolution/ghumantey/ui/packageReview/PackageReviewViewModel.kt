@@ -22,9 +22,6 @@ data class PackageReviewUiState(
 class PackageReviewViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
     private val _state = MutableLiveData(PackageReviewUiState())
     val state = _state as LiveData<PackageReviewUiState>
-    init {
-        _state.set { it.copy() }
-    }
 
     fun updateReview(args: PackageReviewFragmentArgs) {
         apiInterface.getCommentList(args.packageId)

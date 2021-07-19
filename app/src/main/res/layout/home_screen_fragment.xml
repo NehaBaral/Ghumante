@@ -32,8 +32,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         app:boxBackgroundMode="none"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/search_button"
+                        app:layout_constraintEnd_toStartOf="@+id/profile_btn"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:startIconDrawable="@drawable/ic_baseline_search_24">
@@ -44,20 +46,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:layout_marginBottom="8dp"
+                            android:imeOptions="actionSearch"
+                            android:inputType="text"
                             android:background="@drawable/search_bg"
                             android:padding="8dp" />
                     </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:id="@+id/search_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="Search"
-                        android:textColor="@android:color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/profile_btn"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:id="@+id/profile_btn"
@@ -105,45 +98,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Destinations"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_cardview"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/destination_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/destination_title"
-                app:layout_constraintVertical_bias="0.0"
-                tools:listitem="@layout/destination_rv" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/recom_destination_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Recommeded"
+                android:text="Destination"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/destination_rv" />
+                app:layout_constraintTop_toBottomOf="@+id/image_cardview" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recommeded_rv"
@@ -154,7 +116,7 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recom_destination_title"
+                app:layout_constraintTop_toBottomOf="@+id/destination_title"
                 tools:listitem="@layout/destination_rv" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

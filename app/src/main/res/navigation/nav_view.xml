@@ -34,10 +34,17 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true"/>
+
         <action
             android:id="@+id/action_sign_in_fragment_to_agency_home_fragment"
-            app:destination="@id/agency_home_fragment" />
+            app:destination="@id/agency_home_fragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/main_nav"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -52,158 +59,6 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-
-    <fragment
-        android:id="@+id/home_screen_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.home.HomeScreenFragment"
-        tools:layout="@layout/home_screen_fragment">
-        <action
-            android:id="@+id/action_home_screen_fragment_to_destination_fragment"
-            app:destination="@id/packages_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_home_screen_fragment_to_my_profile_fragment"
-            app:destination="@id/my_profile_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/packages_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.packages.PackagesFragment"
-        tools:layout="@layout/packages_fragment">
-        <action
-            android:id="@+id/action_destination_fragment_to_package_detail_fragment"
-            app:destination="@id/package_detail_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <argument
-            android:name="destinationId"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/my_profile_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.myProfile.MyProfileFragment"
-        tools:layout="@layout/my_profile_fragment">
-        <action
-            android:id="@+id/action_my_profile_fragment_to_profile_edit_fragment"
-            app:destination="@id/profile_edit_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_my_profile_fragment_to_my_booking_fragment"
-            app:destination="@id/my_booking_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/profile_edit_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.profileEdit.ProfileEditFragment"
-        tools:layout="@layout/profile_edit_fragment">
-        <action
-            android:id="@+id/action_profile_edit_fragment_to_my_profile_fragment"
-            app:destination="@id/my_profile_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/package_detail_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.packageDetail.PackageDetailFragment"
-        tools:layout="@layout/package_detail_fragment" >
-        <action
-            android:id="@+id/action_package_detail_fragment_to_review_fragment"
-            app:destination="@id/review_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <argument
-            android:name="packageId"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_package_detail_fragment_to_package_review_fragment"
-            app:destination="@id/package_review_fragment" />
-        <!--<action
-            android:id="@+id/action_package_detail_fragment_to_package_book_bottomSheet"
-            app:destination="@id/package_book_bottomSheet"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>-->
-    </fragment>
-
-    <fragment
-        android:id="@+id/my_booking_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.myBooking.MyBookingFragment"
-        tools:layout="@layout/my_booking_fragment" />
-
-    <fragment
-        android:id="@+id/review_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.review.ReviewFragment"
-        tools:layout="@layout/review_fragment">
-        <argument
-            android:name="packageId"
-            app:argType="string" />
-
-        <argument
-            android:name="authorName"
-            app:argType="string"/>
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/package_review_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.packageReview.PackageReviewFragment"
-        tools:layout="@layout/package_review_fragment">
-        <argument
-            android:name="packageId"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/agency_home_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.agency.agencyHome.AgencyHomeFragment"
-        tools:layout="@layout/agency_home_fragment">
-        <argument
-            android:name="token"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_agency_home_fragment_to_add_package_fragment"
-            app:destination="@id/add_package_fragment" />
-        <action
-            android:id="@+id/action_agency_home_fragment_to_agency_booking_fragment"
-            app:destination="@id/agency_booking_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/add_package_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.agency.addPackage.AddPackageFragment"
-        tools:layout="@layout/add_package_fragment">
-        <argument
-            android:name="token"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/agency_booking_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.agency.agencyBooking.AgencyBookingFragment"
-        tools:layout="@layout/agency_booking_fragment"/>
 
     <!--<dialog android:id="@+id/package_book_bottomSheet"
         android:name="com.webtechsolution.ghumantey.ui.packageBook.PackageBookBottomSheet"

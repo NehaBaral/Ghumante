@@ -16,11 +16,15 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 data class packagesUiState(
-    val packagesList: List<SearchPackageItem> = emptyList(),
+    val packagesList: ArrayList<SearchPackageItem> = ArrayList(),
     val loading: Boolean = false,
     val showError: Boolean = false,
     val toast: SingleEvent<String> = SingleEvent()
-)
+){
+    val list = packagesList.sortedBy {
+        it.price
+    }
+}
 
 @HiltViewModel
 class DestinationViewModel @Inject constructor(

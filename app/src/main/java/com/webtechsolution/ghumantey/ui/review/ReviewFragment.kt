@@ -8,9 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.ReviewFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.app_toolbar.*
+import kotlinx.android.synthetic.main.review_fragment.*
 
 @AndroidEntryPoint
 class ReviewFragment : BaseFragment() {
@@ -29,6 +33,13 @@ class ReviewFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.apply {
+            toolbarTitle.text = "Your Review"
+            toolbar_app.apply {
+                NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
+            }
+        }
 
         binding.ratingSubmit.setOnClickListener {
             if (binding.icReview.text.toString() != null){
@@ -38,7 +49,9 @@ class ReviewFragment : BaseFragment() {
         }
 
         viewModel.state.observe(viewLifecycleOwner, Observer {
-            toast(it.toast.value.toString())
+            it.toast.value?.let {
+                toast(it)
+            }
             if (it.reviewSuccess){
                 hideLoadingDialog()
                 findNavController().popBackStack()

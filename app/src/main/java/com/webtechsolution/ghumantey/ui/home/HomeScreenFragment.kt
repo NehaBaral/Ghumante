@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,6 +15,7 @@ import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import com.webtechsolution.ghumantey.ui.home.adapter.DestinationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class HomeScreenFragment : BaseFragment() {
@@ -39,7 +42,6 @@ class HomeScreenFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = DestinationAdapter()
-        binding.destinationRv.adapter = adapter
         binding.recommededRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.destinationList)
@@ -48,11 +50,8 @@ class HomeScreenFragment : BaseFragment() {
         binding.recommededRv.layoutManager = gridLayoutManager
 
         adapter.clicks().subscribe {
-            findNavController().navigate(
-                HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(
-                    it._id
-                )
-            )
+                findNavController().navigate(
+                    HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(it.destination))
         }.isDisposed
 
         binding.apply {
@@ -68,7 +67,19 @@ class HomeScreenFragment : BaseFragment() {
             adapter.submitList(uiState.destinationList)
         })
 
-        binding.searchButton.setOnClickListener {
+        binding.icSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                findNavController().navigate(
+                    HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(
+                        binding.icSearch.text.toString()
+                    )
+                )
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
+       /* binding.searchButton.setOnClickListener {
             if (binding.icSearch.text.toString() != null) {
                 findNavController().navigate(
                     HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(
@@ -76,7 +87,7 @@ class HomeScreenFragment : BaseFragment() {
                     )
                 )
             }
-        }
+        }*/
 
     }
 }

@@ -41,7 +41,8 @@ class PackageDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.bookNowBtn.setOnClickListener {
-            PackageBookBottomSheet().show(childFragmentManager, UUID.randomUUID().toString())
+            findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet(args.packageId))
+            //PackageBookBottomSheet().show(childFragmentManager, UUID.randomUUID().toString())
             //findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet())
         }
 
@@ -57,7 +58,7 @@ class PackageDetailFragment : BaseFragment() {
                 binding.contactEmail.text = item?.email
             }
         })
-      /*  binding.appToolbar.apply {
+        /*binding.appToolbar.apply {
                 toolbarTitle.text = "Package Detail"
                 NavigationUI.setupWithNavController(this, findNavController())
                 setNavigationIcon(R.drawable.ic_arrow_back)

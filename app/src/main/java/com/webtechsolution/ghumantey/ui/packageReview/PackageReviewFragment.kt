@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -43,6 +44,9 @@ class PackageReviewFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.reviewRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
+            it.packageItem?.comments?.size?.let {
+                binding.emptyView.isVisible = it <= 0
+            }
             adapter.submitList(it.packageItem?.comments)
         })
     }
