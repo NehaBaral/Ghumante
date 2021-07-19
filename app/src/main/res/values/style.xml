@@ -51,4 +51,13 @@
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
     </style>
+
+    <style name="SpinnerDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- android:datePickerStyle was not added until API 21 -->
+        <item name="android:datePickerStyle">@style/DatePickerStyle</item>
+    </style>
+
+    <style name="DatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+    </style>
 </resources>
