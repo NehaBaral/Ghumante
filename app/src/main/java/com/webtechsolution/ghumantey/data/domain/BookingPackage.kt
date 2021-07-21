@@ -5,7 +5,7 @@ import java.util.*
 
 data class BookingPackageItem(
     val _id: String,
-    val author: String,
+    val author: Author,
     val booking: Boolean,
     val createdAt: String,
     val updatedAt: String

@@ -25,7 +25,7 @@ class PackageReviewAdapter @Inject constructor() : ListAdapter<CommentItem, Pack
 
     class PackageReviewViewHolder(val binding: PackageReviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CommentItem) {
-            binding.arthurName.text = item.author
+            binding.arthurName.text = item.author.username
             binding.reviewComment.text = item.comment
             binding.packageRating.rating = item.rating.toFloat()
         }

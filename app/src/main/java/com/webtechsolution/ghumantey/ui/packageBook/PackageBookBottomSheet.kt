@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ibotta.android.support.pickerdialogs.SupportedDatePickerDialog
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackageBookBottomsheetBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseBottomSheet
-import com.webtechsolution.ghumantey.ui.packageDetail.PackageDetailFragmentArgs
 import java.util.*
 
 class PackageBookBottomSheet : BaseBottomSheet(), SupportedDatePickerDialog.OnDateSetListener {
@@ -36,6 +36,18 @@ class PackageBookBottomSheet : BaseBottomSheet(), SupportedDatePickerDialog.OnDa
         binding.bookPackage.setOnClickListener {
             viewModel.bookPackage(args.packageId,binding.icNumOfTrav.text.toString(),binding.icDate.text.toString(),binding.icContactInfo.text.toString())
         }
+
+        viewModel.state.observe(viewLifecycleOwner, {
+            it.toast.value?.let {
+                toast(it)
+            }
+            it.success.value?.let {
+                findNavController().popBackStack()
+            }
+
+            if (it.loading) showLoadingDialog("Booking package...")
+            else hideLoadingDialog()
+        })
     }
 
     private fun openDatePicker() {
@@ -50,6 +62,6 @@ class PackageBookBottomSheet : BaseBottomSheet(), SupportedDatePickerDialog.OnDa
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
-        binding.icDate.setText(dayOfMonth.toString() + "/" + (month + 1).toString() + "/" + year.toString())
+        binding.icDate.setText("$year-${month + 1}-$dayOfMonth")
     }
 }

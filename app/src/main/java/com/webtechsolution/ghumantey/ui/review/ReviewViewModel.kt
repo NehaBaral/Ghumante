@@ -16,34 +16,41 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 data class ReviewUiState(
-    val packageItem:PackagesListItem?=null,
+    val packageItem: PackagesListItem? = null,
     val toast: SingleEvent<String> = SingleEvent(),
-    val reviewSuccess:Boolean = false
+    val reviewSuccess: SingleEvent<Unit> = SingleEvent(),
+    val loading: Boolean = false
 )
-@HiltViewModel
-class ReviewViewModel @Inject constructor(val apiInterface:ApiInterface,val preference:Preferences) : BaseViewModel() {
 
-    private val  _state = MutableLiveData(ReviewUiState())
+@HiltViewModel
+class ReviewViewModel @Inject constructor(
+    val apiInterface: ApiInterface,
+    val preference: Preferences
+) : BaseViewModel() {
+
+    private val _state = MutableLiveData(ReviewUiState())
     val state = _state as LiveData<ReviewUiState>
 
     fun postReview(review: String, rating: Float, args: ReviewFragmentArgs) {
-        val commentBody:CommentBody = CommentBody(review,rating.toInt())
+        _state.update { copy(loading = true) }
+        val commentBody: CommentBody = CommentBody(review, rating.toInt())
         val token = preference.authInfo?.token!!
-        apiInterface.postComment("Bearer $token",args.packageId,commentBody)
+        apiInterface.postComment("Bearer $token", args.packageId, commentBody)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
+            .subscribe({
                 _state.update {
                     copy(
-                        reviewSuccess = true
+                        loading = false,
+                        reviewSuccess = Unit.toEvent()
                     )
                 }
-            },{
-                println("error=="+it.message)
+            }, {
+                println("error==" + it.message)
                 it.printStackTrace()
                 _state.update {
                     copy(
-                        reviewSuccess = true,
+                        loading = false,
                         toast = SingleEvent("Couldn't update review")
                     )
                 }

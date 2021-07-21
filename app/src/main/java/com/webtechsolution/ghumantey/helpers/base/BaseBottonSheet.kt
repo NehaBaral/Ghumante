@@ -21,13 +21,23 @@ import kotlin.math.roundToInt
 open class BaseBottomSheet : BottomSheetDialogFragment(), DisposableContainer {
 
     private val disposeBag = CompositeDisposable()
+    private var loadingProgressBar: Dialog? = null
+
+    protected fun showLoadingDialog(title: String = "Loading...") {
+        loadingProgressBar = (loadingProgressBar ?: ProgressDialog(requireContext())).apply {
+            setCancelable(false)
+            setTitle(title)
+            show()
+        }
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme).apply {
             setCanceledOnTouchOutside(true)
             this.setOnShowListener {
                 val dialog = it as BottomSheetDialog
-                val bottomSheet = dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)!!
+                val bottomSheet =
+                    dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)!!
                 BottomSheetBehavior.from(bottomSheet).apply {
                     isDraggable = true
                     peekHeight = 300.dpToPx()
@@ -35,6 +45,14 @@ open class BaseBottomSheet : BottomSheetDialogFragment(), DisposableContainer {
                 }
             }
         }
+    }
+
+    protected fun hideLoadingDialog() {
+        loadingProgressBar?.dismiss()
+    }
+
+    protected fun toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(requireContext(), message, duration).show()
     }
 
     override fun onDestroyView() {

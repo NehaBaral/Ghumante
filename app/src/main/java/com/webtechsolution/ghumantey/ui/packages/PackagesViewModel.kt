@@ -54,6 +54,7 @@ class DestinationViewModel @Inject constructor(
                     )
                 }
             }, { throwable ->
+                throwable.printStackTrace()
                 println("Error====" + throwable.message)
                 _state.update {
                     copy(

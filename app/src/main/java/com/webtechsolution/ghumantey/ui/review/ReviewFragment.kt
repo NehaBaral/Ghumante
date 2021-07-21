@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.review_fragment.*
 @AndroidEntryPoint
 class ReviewFragment : BaseFragment() {
     override val viewModel by viewModels<ReviewViewModel>()
-    lateinit var binding:ReviewFragmentBinding
+    lateinit var binding: ReviewFragmentBinding
     private val args by navArgs<ReviewFragmentArgs>()
 
     override fun onCreateView(
@@ -27,7 +27,7 @@ class ReviewFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ReviewFragmentBinding.inflate(layoutInflater,container,false)
+        binding = ReviewFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -42,9 +42,13 @@ class ReviewFragment : BaseFragment() {
         }
 
         binding.ratingSubmit.setOnClickListener {
-            if (binding.icReview.text.toString() != null){
+            if (binding.icReview.text.toString() != null) {
                 showLoadingDialog("Updating review...")
-                viewModel.postReview(binding.icReview.text.toString(),binding.packageRating.rating,args)
+                viewModel.postReview(
+                    binding.icReview.text.toString(),
+                    binding.packageRating.rating,
+                    args
+                )
             }
         }
 
@@ -52,10 +56,11 @@ class ReviewFragment : BaseFragment() {
             it.toast.value?.let {
                 toast(it)
             }
-            if (it.reviewSuccess){
-                hideLoadingDialog()
+            it.reviewSuccess.value?.let {
                 findNavController().popBackStack()
             }
+            if (it.loading) showLoadingDialog("Loading review...")
+            else hideLoadingDialog()
         })
     }
 }
