@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackageReviewFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import com.webtechsolution.ghumantey.ui.packageReview.adapter.PackageReviewAdapter
@@ -18,12 +21,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PackageReviewFragment : BaseFragment() {
     override val viewModel by viewModels<PackageReviewViewModel>()
-    lateinit var binding:PackageReviewFragmentBinding
+    lateinit var binding: PackageReviewFragmentBinding
     private val args by navArgs<PackageReviewFragmentArgs>()
 
     @Inject
-    lateinit var adapter:PackageReviewAdapter
-
+    lateinit var adapter: PackageReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,7 @@ class PackageReviewFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = PackageReviewFragmentBinding.inflate(layoutInflater,container,false)
+        binding = PackageReviewFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -44,10 +46,20 @@ class PackageReviewFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.reviewRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
-            it.packageItem?.comments?.size?.let {
+            it.commentItem?.size?.let {
                 binding.emptyView.isVisible = it <= 0
             }
-            adapter.submitList(it.packageItem?.comments)
+            adapter.submitList(it.commentItem)
+            if (it.loading) showLoadingDialog("Loading...")
+            else hideLoadingDialog()
         })
+
+        binding.appbarToolbar.apply {
+            toolbarApp.apply {
+                toolbarTitle.text = "Package Review "
+                NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
+            }
+        }
     }
 }

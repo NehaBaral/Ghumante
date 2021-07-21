@@ -1,5 +1,6 @@
 package com.webtechsolution.ghumantey.data.domain
 
+class CommentList : ArrayList<CommentItem>()
 
 data class CommentItem(
     val _id: String,

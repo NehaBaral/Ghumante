@@ -6,8 +6,8 @@ data class SearchPackageItem(
     val __v: Int,
     val _id: String,
     val agency: String,
-    val bookings: List<BookingPackageItem>,
-    val comments: List<CommentItem>,
+    val bookings: List<Booking>,
+    val comments: List<Comment>,
     val createdAt: String,
     val description: String,
     val destination: String,
@@ -18,5 +18,21 @@ data class SearchPackageItem(
     val name: String,
     val phone: Long,
     val price: Int,
+    val updatedAt: String
+)
+data class Booking(
+    val _id: String,
+    val author: String,
+    val booking: Boolean,
+    val createdAt: String,
+    val updatedAt: String
+)
+
+data class Comment(
+    val _id: String,
+    val author: String,
+    val comment: String,
+    val createdAt: String,
+    val rating: Int,
     val updatedAt: String
 )

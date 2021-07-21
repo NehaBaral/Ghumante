@@ -5,6 +5,7 @@ import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.domain.CommentItem
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
@@ -14,27 +15,29 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 data class PackageReviewUiState(
-    val packageItem: PackagesListItem?=null,
+    val commentItem: List<CommentItem>? = null,
     val toast: SingleEvent<String> = SingleEvent(),
-    val reviewSuccess:Boolean = false
+    val loading: Boolean = false
 )
+
 @HiltViewModel
 class PackageReviewViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
     private val _state = MutableLiveData(PackageReviewUiState())
     val state = _state as LiveData<PackageReviewUiState>
 
     fun updateReview(args: PackageReviewFragmentArgs) {
+        _state.update { copy(loading = true) }
         apiInterface.getCommentList(args.packageId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _state.update {
-                    copy(packageItem = it,reviewSuccess = true)
+                    copy(commentItem = it, loading = false)
                 }
-            },{
+            }, {
                 it.message
                 _state.update {
-                    copy(reviewSuccess = true,toast = SingleEvent("Server Error!"))
+                    copy(toast = SingleEvent("Server Error!"), loading = false)
                 }
             }).isDisposed
     }

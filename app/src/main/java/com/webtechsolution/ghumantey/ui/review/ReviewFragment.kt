@@ -59,7 +59,7 @@ class ReviewFragment : BaseFragment() {
             it.reviewSuccess.value?.let {
                 findNavController().popBackStack()
             }
-            if (it.loading) showLoadingDialog("Loading review...")
+            if (it.loading) showLoadingDialog("updating review...")
             else hideLoadingDialog()
         })
     }

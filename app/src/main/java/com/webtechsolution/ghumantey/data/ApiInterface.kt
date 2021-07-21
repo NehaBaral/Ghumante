@@ -37,7 +37,7 @@ interface ApiInterface {
     ): Single<PackagesListItem>
 
     @GET("packages/{id}/comments")
-    fun getCommentList(@Path("id") packageId: String): Single<PackagesListItem>
+    fun getCommentList(@Path("id") packageId: String): Single<CommentList>
 
     /*@GET("destination/{id}/packages")
     fun getDestinationPackages(@Path("id") destinationId:String):Single<PackagesModel>*/
