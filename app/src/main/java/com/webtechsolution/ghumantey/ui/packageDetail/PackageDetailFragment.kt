@@ -40,10 +40,15 @@ class PackageDetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.toolbar.apply {
+            toolbarApp.apply {
+                toolbarTitle.text = "Detail "
+                NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
+            }
+        }
         binding.bookNowBtn.setOnClickListener {
             findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet(args.packageId))
-            //PackageBookBottomSheet().show(childFragmentManager, UUID.randomUUID().toString())
-            //findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet())
         }
 
         viewModel.pState.observe(viewLifecycleOwner, Observer {
