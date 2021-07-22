@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
 import com.webtechsolution.ghumantey.data.Preferences
-import com.webtechsolution.ghumantey.data.domain.PackagesList
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.data.domain.PostPackage
 import com.webtechsolution.ghumantey.helpers.SingleEvent
@@ -27,9 +26,16 @@ class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface,val
     private val _state = MutableLiveData(AddPackageUiState())
     val state = _state as LiveData<AddPackageUiState>
     fun updateNewPackageDetail(
-        packageName: String, packagePrice: Int, destinationName: String,
-        destinationDesc: String, destinationIternary: String, destinationIncluded: String,
-        destinationExcluded: String, destinationPhone: Long, destinationEmail: String
+        packageName: String,
+        packagePrice: Int,
+        destinationName: String,
+        destinationDesc: String,
+        destinationIternary: String,
+        destinationIncluded: String,
+        destinationExcluded: String,
+        destinationPhone: Long,
+        destinationEmail: String,
+        destinationDays: String
     ) {
         val postPackage: PostPackage = PostPackage(
             destinationDesc,
@@ -40,7 +46,8 @@ class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface,val
             destinationIternary,
             packageName,
             destinationPhone,
-            packagePrice
+            packagePrice,
+            destinationDays
         )
         apiInterface.obtainPackagesList("Bearer ${preference.authInfo?.token}", postPackage)
             .subscribeOn(Schedulers.io())

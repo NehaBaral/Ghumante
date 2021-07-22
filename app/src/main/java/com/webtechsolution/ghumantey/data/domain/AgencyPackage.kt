@@ -23,6 +23,7 @@ data class AgencyPackageItem(
     val name: String,
     val phone: Long,
     val price: Int,
+    val days:String?,
     val updatedAt: String
 )
 

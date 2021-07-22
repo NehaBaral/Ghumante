@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
 
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="Package Price"
         android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="8dp" />
 
     <EditText
@@ -48,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:inputType="number"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
 
@@ -57,7 +60,7 @@
         android:layout_height="wrap_content"
         android:text="Destination"
         android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="8dp" />
 
     <EditText
@@ -66,8 +69,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/days_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Days"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp" />
+
+        <EditText
+            android:id="@+id/ic_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_bg"
+            android:padding="10dp"/>
 
     <TextView
         android:id="@+id/destination_desc"
@@ -75,7 +98,7 @@
         android:layout_height="wrap_content"
         android:text="Description"
         android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="8dp" />
 
     <EditText
@@ -84,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
 
@@ -93,7 +117,7 @@
         android:layout_height="wrap_content"
         android:text="Iternaries"
         android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="8dp" />
 
     <EditText
@@ -102,6 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
 
@@ -111,7 +136,7 @@
         android:layout_height="wrap_content"
         android:text="Included"
         android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="8dp" />
 
     <EditText
@@ -120,15 +145,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
 
         <TextView
             android:id="@+id/destination_excluded"
             android:layout_width="wrap_content"
-            android:layout_height="5dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="Excluded"
             android:textColor="@android:color/black" />
 
@@ -156,6 +182,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:inputType="number"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"/>
 
@@ -186,7 +213,6 @@
             android:background="@drawable/edittext_bg"
             android:padding="20dp"
             android:textAlignment="center"
-            android:backgroundTint="@color/purple_700"
             android:textColor="@android:color/black"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"

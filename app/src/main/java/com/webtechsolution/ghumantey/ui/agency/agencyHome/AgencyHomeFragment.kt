@@ -44,8 +44,6 @@ class AgencyHomeFragment : BaseFragment() {
           binding.appToolbar.apply {
                 toolbarTitle.text = "Packages"
                 toolbarApp.apply {
-                    NavigationUI.setupWithNavController(this, findNavController())
-                    setNavigationIcon(R.drawable.ic_arrow_back)
                     inflateMenu(R.menu.booked_package)
                     setOnMenuItemClickListener {
                         when(it.itemId){

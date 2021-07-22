@@ -26,8 +26,13 @@ class AgencyHomeAdapter : ListAdapter<AgencyPackageItem,AgencyHomeAdapter.Agency
     class AgencyHomeViewHolder(val binding:MyBookingRvBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AgencyPackageItem?) {
             binding.packageName.text = item?.name
-            binding.agencyName.text = item?.agency?.username
-            binding.packageAmount.text = item?.price.toString()
+            binding.phoneNum.text = item?.phone.toString()
+            binding.packageAmount.text = "Rs ${item?.price.toString()}"
+            if (item?.days.isNullOrEmpty()){
+                binding.packageDays.text = "Not Mentioned"
+            }else {
+                binding.packageDays.text = "${item?.days} days"
+            }
         }
     }
 }

@@ -9,5 +9,6 @@ data class PostPackage(
     val iternaries: String,
     val name: String,
     val phone: Long,
-    val price: Int
+    val price: Int,
+    val days:String
 )
