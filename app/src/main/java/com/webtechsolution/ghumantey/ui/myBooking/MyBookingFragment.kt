@@ -25,7 +25,7 @@ class MyBookingFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getBookingPackage("")
+        viewModel.getBookingPackage()
     }
 
     override fun onCreateView(

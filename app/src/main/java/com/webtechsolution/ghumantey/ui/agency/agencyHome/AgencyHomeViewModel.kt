@@ -5,6 +5,7 @@ import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.Preferences
 import com.webtechsolution.ghumantey.data.domain.AgencyPackage
 import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
@@ -18,12 +19,12 @@ data class AgencyHomeUiState(
     val agencyPackageList:List<AgencyPackageItem> = emptyList()
 )
 @HiltViewModel
-class AgencyHomeViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
+class AgencyHomeViewModel @Inject constructor(val apiInterface: ApiInterface,val preference:Preferences) : BaseViewModel() {
     private val _state = MutableLiveData(AgencyHomeUiState())
     val state = _state as LiveData<AgencyHomeUiState>
 
-    fun updateAgencyPackage(token: String) {
-        apiInterface.getAgencyByPackage("Bearer "+token)
+    fun updateAgencyPackage() {
+        apiInterface.getAgencyByPackage("Bearer ${preference.authInfo?.token}")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({packageItem->
@@ -31,6 +32,8 @@ class AgencyHomeViewModel @Inject constructor(val apiInterface: ApiInterface) : 
                     it.copy(agencyPackageList = packageItem,toast = SingleEvent("Agency Packages"))
                 }
             },{
+                it.printStackTrace()
+                it.message
                 _state.set {
                     it.copy(toast = SingleEvent("Failed"))
                 }

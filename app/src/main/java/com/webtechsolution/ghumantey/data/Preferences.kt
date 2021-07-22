@@ -23,6 +23,7 @@ class Preferences @Inject constructor(@ApplicationContext val context: Context) 
         get() = devicePreferences.getString(KEY_FCM_TOKEN,null)
         set(value) = devicePreferences.edit { putString(KEY_FCM_TOKEN,value) }
     val isUserLoggedIn get() = authInfo?.token != null
+    val isAgency get() = authInfo?.agency
     var authInfo: Login?
         get() = userPreferences.getString(KEY_USER, null)?.to<Login>()
         set(value) = userPreferences.edit(true) { putString(KEY_USER, value.toJson()) }

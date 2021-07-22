@@ -63,11 +63,6 @@ class PackageDetailFragment : BaseFragment() {
                 binding.contactEmail.text = item?.email
             }
         })
-        /*binding.appToolbar.apply {
-                toolbarTitle.text = "Package Detail"
-                NavigationUI.setupWithNavController(this, findNavController())
-                setNavigationIcon(R.drawable.ic_arrow_back)
-        }*/
 
         binding.writeReviewBtn.setOnClickListener {
             findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToReviewFragment(args.packageId,""))

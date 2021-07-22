@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/agency_nav"
+    app:startDestination="@id/agency_home_fragment">
+
+    <include app:graph="@navigation/nav_view" />
+    <action
+        android:id="@+id/action_to_auth"
+        app:destination="@id/nav_view" />
+
+    <fragment
+        android:id="@+id/agency_home_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.agency.agencyHome.AgencyHomeFragment"
+        tools:layout="@layout/agency_home_fragment">
+        <action
+            android:id="@+id/action_agency_home_fragment_to_add_package_fragment"
+            app:destination="@id/add_package_fragment" />
+        <action
+            android:id="@+id/action_agency_home_fragment_to_agency_booking_fragment"
+            app:destination="@id/agency_booking_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_package_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.agency.addPackage.AddPackageFragment"
+        tools:layout="@layout/add_package_fragment">
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/agency_booking_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.agency.agencyBooking.AgencyBookingFragment"
+        tools:layout="@layout/agency_booking_fragment" />
+
+</navigation>

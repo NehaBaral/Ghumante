@@ -3,7 +3,9 @@ package com.webtechsolution.ghumantey.ui.agency.addPackage
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.Preferences
 import com.webtechsolution.ghumantey.data.domain.PackagesList
+import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.data.domain.PostPackage
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
@@ -16,16 +18,15 @@ import javax.inject.Inject
 
 data class AddPackageUiState(
     val toast: SingleEvent<String> = SingleEvent(),
-    val packageList: PackagesList? = null,
+    val packageList: PackagesListItem? = null,
     val success: SingleEvent<Unit> = SingleEvent()
 )
 
 @HiltViewModel
-class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel() {
+class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface,val preference: Preferences) : BaseViewModel() {
     private val _state = MutableLiveData(AddPackageUiState())
     val state = _state as LiveData<AddPackageUiState>
     fun updateNewPackageDetail(
-        token: String,
         packageName: String, packagePrice: Int, destinationName: String,
         destinationDesc: String, destinationIternary: String, destinationIncluded: String,
         destinationExcluded: String, destinationPhone: Long, destinationEmail: String
@@ -41,7 +42,7 @@ class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface) : 
             destinationPhone,
             packagePrice
         )
-        apiInterface.obtainPackagesList("Bearer " + token, postPackage)
+        apiInterface.obtainPackagesList("Bearer ${preference.authInfo?.token}", postPackage)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ packageList ->
@@ -54,6 +55,7 @@ class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface) : 
                 }
             }, {
                 it.message
+                it.printStackTrace()
                 _state.set {
                     it.copy(toast = SingleEvent("Updated failed"), success = Unit.toEvent())
                 }

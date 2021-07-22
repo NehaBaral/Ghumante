@@ -5,6 +5,7 @@ import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.Preferences
 import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
@@ -18,12 +19,12 @@ data class AgencyBookingUiState(
     val agencyPackageList:List<AgencyPackageItem> = emptyList()
 )
 @HiltViewModel
-class AgencyBookingViewModel @Inject constructor(val apiInterface: ApiInterface) : BaseViewModel(){
+class AgencyBookingViewModel @Inject constructor(val apiInterface: ApiInterface,val preference: Preferences) : BaseViewModel(){
     private val _state = MutableLiveData(AgencyBookingUiState())
     val state = _state as LiveData<AgencyBookingUiState>
 
     fun updateAgencyPackage(token: String) {
-        apiInterface.getAgencyByPackage("Bearer "+token)
+        apiInterface.getAgencyByPackage("Bearer ${preference.authInfo?.token}")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({packageItem->

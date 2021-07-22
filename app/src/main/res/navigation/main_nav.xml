@@ -133,35 +133,6 @@
             app:argType="string" />
     </fragment>
 
-    <fragment
-        android:id="@+id/agency_home_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.agency.agencyHome.AgencyHomeFragment"
-        tools:layout="@layout/agency_home_fragment">
-        <argument
-            android:name="token"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_agency_home_fragment_to_add_package_fragment"
-            app:destination="@id/add_package_fragment" />
-        <action
-            android:id="@+id/action_agency_home_fragment_to_agency_booking_fragment"
-            app:destination="@id/agency_booking_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/add_package_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.agency.addPackage.AddPackageFragment"
-        tools:layout="@layout/add_package_fragment">
-        <argument
-            android:name="token"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/agency_booking_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.agency.agencyBooking.AgencyBookingFragment"
-        tools:layout="@layout/agency_booking_fragment"/>
-
     <dialog
         android:id="@+id/package_book_bottomsheet"
         android:name="com.webtechsolution.ghumantey.ui.packageBook.PackageBookBottomSheet"

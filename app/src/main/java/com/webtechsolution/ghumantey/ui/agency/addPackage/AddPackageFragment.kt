@@ -10,14 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.webtechsolution.ghumantey.databinding.AddPackageFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
-import com.webtechsolution.ghumantey.ui.agency.agencyHome.AgencyHomeFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddPackageFragment : BaseFragment(){
     override val viewModel by viewModels<AddPackageViewModel>()
     lateinit var binding:AddPackageFragmentBinding
-    private val args by navArgs<AgencyHomeFragmentArgs>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = AddPackageFragmentBinding.inflate(layoutInflater,container,false)
@@ -36,7 +34,7 @@ class AddPackageFragment : BaseFragment(){
             val destinationExcluded = binding.icDestinationExcluded.text.toString()
             val destinationPhone = binding.icDestinationPhone.text.toString().toLong()
             val destinationEmail = binding.icDestinationEmail.text.toString()
-            viewModel.updateNewPackageDetail(args.token,packageName,packagePrice,destinationName,
+            viewModel.updateNewPackageDetail(packageName,packagePrice,destinationName,
             destinationDesc,destinationIternary,destinationIncluded,destinationExcluded,
             destinationPhone,destinationEmail)
         }

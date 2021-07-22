@@ -66,7 +66,7 @@ class SignInFragment : BaseFragment() {
                         if (!uiState.signInResponse?.agency!!){
                             findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
                         }else{
-                        //    findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToAgencyHomeFragment(uiState.signInResponse.token))
+                            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToAgencyHomeFragment())
                         }
                     }
                 })

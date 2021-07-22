@@ -21,13 +21,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class AgencyHomeFragment : BaseFragment() {
     override val viewModel by viewModels<AgencyHomeViewModel>()
     lateinit var binding:AgencyHomeFragmentBinding
-    private val args by navArgs<AgencyHomeFragmentArgs>()
     lateinit var adapter:AgencyHomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = AgencyHomeAdapter()
-        viewModel.updateAgencyPackage(args.token)
+        viewModel.updateAgencyPackage()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,7 +59,12 @@ class AgencyHomeFragment : BaseFragment() {
         }
 
         binding.addPackages.setOnClickListener {
-            findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToAddPackageFragment(args.token))
+            findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToAddPackageFragment(""))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateAgencyPackage()
     }
 }
