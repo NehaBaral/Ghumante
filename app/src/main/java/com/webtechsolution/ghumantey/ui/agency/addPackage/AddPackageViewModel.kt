@@ -1,30 +1,38 @@
 package com.webtechsolution.ghumantey.ui.agency.addPackage
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
 import com.webtechsolution.ghumantey.data.Preferences
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.data.domain.PostPackage
-import com.webtechsolution.ghumantey.helpers.SingleEvent
+import com.webtechsolution.ghumantey.helpers.*
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
-import com.webtechsolution.ghumantey.helpers.set
-import com.webtechsolution.ghumantey.helpers.toEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
+import java.util.ArrayList
 import javax.inject.Inject
 
 data class AddPackageUiState(
     val toast: SingleEvent<String> = SingleEvent(),
     val packageList: PackagesListItem? = null,
-    val success: SingleEvent<Unit> = SingleEvent()
+    val success: SingleEvent<Unit> = SingleEvent(),
+    val image: Uri? = null
 )
 
 @HiltViewModel
-class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface,val preference: Preferences) : BaseViewModel() {
+class AddPackageViewModel @Inject constructor(
+    val apiInterface: ApiInterface,
+    val preference: Preferences,
+    val context: Context
+) : BaseViewModel() {
     private val _state = MutableLiveData(AddPackageUiState())
     val state = _state as LiveData<AddPackageUiState>
+
     fun updateNewPackageDetail(
         packageName: String,
         packagePrice: Int,
@@ -37,20 +45,31 @@ class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface,val
         destinationEmail: String,
         destinationDays: String
     ) {
-        val postPackage: PostPackage = PostPackage(
-            destinationDesc,
-            destinationName,
-            destinationEmail,
-            destinationExcluded,
-            destinationIncluded,
-            destinationIternary,
-            packageName,
-            destinationPhone,
-            packagePrice,
-            destinationDays
+        apiInterface.uploadImage(
+            listOf(
+                FormUtils.prepareFilePart(
+                    "file",
+                    state.value?.image,
+                    context
+                )
+            )
         )
-        apiInterface.obtainPackagesList("Bearer ${preference.authInfo?.token}", postPackage)
-            .subscribeOn(Schedulers.io())
+            .flatMap {
+                val postPackage: PostPackage = PostPackage(
+                    destinationDesc,
+                    destinationName,
+                    destinationEmail,
+                    destinationExcluded,
+                    destinationIncluded,
+                    destinationIternary,
+                    packageName,
+                    destinationPhone,
+                    packagePrice,
+                    destinationDays,
+                    it.fileName
+                )
+                apiInterface.obtainPackagesList("Bearer ${preference.authInfo?.token}", postPackage)
+            }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ packageList ->
                 _state.set {
@@ -68,5 +87,9 @@ class AddPackageViewModel @Inject constructor(val apiInterface: ApiInterface,val
                 }
             }).isDisposed
 
+    }
+
+    fun addImage(packageImage: Uri) {
+        _state.update { copy(image = packageImage) }
     }
 }

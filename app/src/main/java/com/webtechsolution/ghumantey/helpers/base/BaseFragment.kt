@@ -16,7 +16,7 @@ abstract class BaseFragment : Fragment(), DisposableContainer {
 
     protected abstract val viewModel: BaseViewModel
 
-    private val disposeBag = CompositeDisposable()
+    val disposeBag = CompositeDisposable()
 
     private var loadingProgressBar: Dialog? = null
 

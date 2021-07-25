@@ -10,5 +10,6 @@ data class PostPackage(
     val name: String,
     val phone: Long,
     val price: Int,
-    val days:String
+    val days:String,
+    val image:String
 )

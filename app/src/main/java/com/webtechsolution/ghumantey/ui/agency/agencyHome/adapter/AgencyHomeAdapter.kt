@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding3.view.clicks
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.data.domain.SearchPackageItem
@@ -38,6 +40,11 @@ class AgencyHomeAdapter : ListAdapter<AgencyPackageItem,AgencyHomeAdapter.Agency
             }else {
                 binding.packageDays.text = "${item?.days} days"
             }
+
+            Glide.with(binding.root.context)
+                .load(item.image)
+                .placeholder(R.drawable.testimage)
+                .into(binding.packageImage)
 
             binding.bookedUser.setOnClickListener {
                 actionSubject.onNext(AdaptorAction.UserDetailClicked(item))

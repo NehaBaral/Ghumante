@@ -2,6 +2,7 @@ package com.webtechsolution.ghumantey.data
 
 import com.webtechsolution.ghumantey.data.domain.*
 import io.reactivex.Single
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface ApiInterface {
@@ -66,4 +67,8 @@ interface ApiInterface {
         @Path("id") packageId: String,
         @Body packages: BookPackageBody
     ): Single<PackagesListItem>
+
+    @Multipart
+    @POST("/saveImage")
+    fun uploadImage(@Part parents:List<MultipartBody.Part>):Single<FileName>
 }

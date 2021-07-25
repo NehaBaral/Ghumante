@@ -1,5 +1,6 @@
 package com.webtechsolution.ghumantey.ui.agency.addPackage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.AddPackageFragmentBinding
+import com.webtechsolution.ghumantey.helpers.FormUtils
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
-import com.webtechsolution.ghumantey.ui.agency.agencyHome.AgencyHomeFragmentDirections
+import com.webtechsolution.ghumantey.ui.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.android.schedulers.AndroidSchedulers
+import okhttp3.MultipartBody
+import java.util.ArrayList
 
 @AndroidEntryPoint
 class AddPackageFragment : BaseFragment() {
@@ -70,6 +75,23 @@ class AddPackageFragment : BaseFragment() {
                     toast(it)
                 }
             })
+
+            binding.packageImage.setOnClickListener {
+                ImagePicker.pickImage(disposeBag, this@AddPackageFragment, true)
+            }
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        ImagePicker.onImagePickResult(this, requestCode, resultCode, data)
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter { it -> it.isNotEmpty() }
+            .map { it -> it[0] }
+            .subscribe({ uri ->
+                viewModel.addImage(uri)
+            }
+            ) { throwable -> toast("Error while loading image") }.isDisposed
+    }
+
 }
