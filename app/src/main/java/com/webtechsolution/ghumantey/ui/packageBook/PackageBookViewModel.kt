@@ -9,6 +9,7 @@ import com.webtechsolution.ghumantey.helpers.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.helpers.toEvent
 import com.webtechsolution.ghumantey.helpers.update
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,6 +41,6 @@ class PackageBookViewModel @Inject constructor(
                 it.printStackTrace()
                 it.message
                 _state.update { copy(loading = false,toast = SingleEvent("Booking Failed")) }
-            }).isDisposed
+            }).into(this)
     }
 }

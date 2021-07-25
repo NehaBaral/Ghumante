@@ -10,6 +10,7 @@ import com.webtechsolution.ghumantey.data.domain.Login
 import com.webtechsolution.ghumantey.data.domain.SignUpBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.helpers.set
 import com.webtechsolution.ghumantey.helpers.toEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -52,7 +53,7 @@ class SignInViewModel @Inject constructor(private val apiInterface: ApiInterface
                         toast = SingleEvent("Login Failed"),
                     )
                 }
-            }).isDisposed
+            }).into(this)
 
     }
 }

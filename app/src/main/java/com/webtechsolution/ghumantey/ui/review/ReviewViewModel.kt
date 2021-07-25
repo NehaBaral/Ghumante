@@ -10,6 +10,7 @@ import com.webtechsolution.ghumantey.data.domain.CommentBody
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.helpers.toEvent
 import com.webtechsolution.ghumantey.helpers.update
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -54,6 +55,6 @@ class ReviewViewModel @Inject constructor(
                         toast = SingleEvent("Couldn't update review")
                     )
                 }
-            }).isDisposed
+            }).into(this)
     }
 }

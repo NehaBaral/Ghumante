@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.webtechsolution.ghumantey.databinding.HomeScreenFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.ui.home.adapter.DestinationAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -52,7 +53,7 @@ class HomeScreenFragment : BaseFragment() {
         adapter.clicks().subscribe {
                 findNavController().navigate(
                     HomeScreenFragmentDirections.actionHomeScreenFragmentToDestinationFragment(it.destination))
-        }.isDisposed
+        }.into(this)
 
         binding.apply {
             binding.profileBtn.setOnClickListener {

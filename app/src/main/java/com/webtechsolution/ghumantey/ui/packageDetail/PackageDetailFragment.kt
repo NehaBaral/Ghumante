@@ -51,8 +51,8 @@ class PackageDetailFragment : BaseFragment() {
             findNavController().navigate(PackageDetailFragmentDirections.actionPackageDetailFragmentToPackageBookBottomSheet(args.packageId))
         }
 
-        viewModel.pState.observe(viewLifecycleOwner, Observer {
-            it.packageDetail.let {item->
+        viewModel.pState.observe(viewLifecycleOwner, Observer {uiState->
+            uiState.packageDetail.let {item->
                 binding.packageAmount.text = item?.price.toString()
                 binding.packageDesc.text = item?.description.toString()
                 binding.packageDays.text = item?.updatedAt
@@ -61,6 +61,16 @@ class PackageDetailFragment : BaseFragment() {
                 binding.includedRv.text = item?.iternaries
                 binding.contactNumber.text = item?.phone.toString()
                 binding.contactEmail.text = item?.email
+                val isBooked:Boolean? = item?.bookings?.find {
+                    it.author._id == uiState.loginData?.userId
+                }?.booking
+                if (isBooked == true){
+                    binding.bookNowBtn.isEnabled = false
+                    binding.bookNowBtn.text = "Already Booked"
+                }else{
+                    binding.bookNowBtn.isEnabled = true
+                    binding.bookNowBtn.text = "Book Now"
+                }
             }
         })
 

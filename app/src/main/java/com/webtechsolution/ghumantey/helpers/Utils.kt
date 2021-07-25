@@ -6,7 +6,9 @@ import android.net.Uri
 import android.util.DisplayMetrics
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Function
+import io.reactivex.internal.disposables.DisposableContainer
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.io.FileOutputStream
@@ -68,4 +70,8 @@ fun moveFile(src: Uri?, destination: Uri?, context: Context): Observable<Boolean
         outputStream!!.close()
         true
     }.subscribeOn(Schedulers.io()).toObservable()
+}
+
+fun Disposable.into(container: DisposableContainer) {
+    container.add(this)
 }

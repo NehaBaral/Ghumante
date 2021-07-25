@@ -8,6 +8,7 @@ import com.webtechsolution.ghumantey.data.ApiInterface
 import com.webtechsolution.ghumantey.data.domain.SignUpBody
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.helpers.set
 import com.webtechsolution.ghumantey.helpers.toEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -45,7 +46,7 @@ class SignUpViewModel @Inject constructor(val apiInterface: ApiInterface) : Base
                         toast = SingleEvent("Sign up failed")
                     )
                 }
-            }).isDisposed
+            }).into(this)
     }
 
 }

@@ -59,7 +59,7 @@ interface ApiInterface {
     ): Single<PackagesListItem>
 
     @GET("myBookings")
-    fun getBookingPackage(@Header("Authorization") token: String): Single<AgencyPackageItem>
+    fun getBookingPackage(@Header("Authorization") token: String): Single<List<SearchPackageItem>>
 
     @POST("packages/{id}/bookings")
     fun bookPackage(

@@ -5,10 +5,12 @@ import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.webtechsolution.ghumantey.data.ApiInterface
+import com.webtechsolution.ghumantey.data.Preferences
 import com.webtechsolution.ghumantey.data.RoomDB
 import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.helpers.set
 import com.webtechsolution.ghumantey.helpers.update
 import io.reactivex.Completable
@@ -22,7 +24,7 @@ data class DestinationUiState(
     val toast: SingleEvent<String> = SingleEvent()
 )
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor(private val apiInterface: ApiInterface,private val roomDB: RoomDB) : BaseViewModel() {
+class HomeScreenViewModel @Inject constructor(private val apiInterface: ApiInterface,private val roomDB: RoomDB,val preferences: Preferences) : BaseViewModel() {
     private val _state = MutableLiveData(DestinationUiState())
     val state = _state as LiveData<DestinationUiState>
     fun getDestinationList() {
@@ -44,7 +46,7 @@ class HomeScreenViewModel @Inject constructor(private val apiInterface: ApiInter
                         toast = SingleEvent("Database error")
                     )
                 }
-            }).isDisposed
+            }).into(this)
         getServerDestination()
     }
 
@@ -63,14 +65,12 @@ class HomeScreenViewModel @Inject constructor(private val apiInterface: ApiInter
                     )
                 }
             }, { throwable ->
-                println("Error====" + throwable.message)
-                println("Errrr==="+throwable.printStackTrace())
                 _state.update {
                     copy(
                         loading = false,
                         toast = SingleEvent("Server error")
                     )
                 }
-            }).isDisposed
+            }).into(this)
     }
 }

@@ -9,6 +9,7 @@ import com.webtechsolution.ghumantey.data.domain.CommentItem
 import com.webtechsolution.ghumantey.data.domain.PackagesListItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.helpers.set
 import com.webtechsolution.ghumantey.helpers.update
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,7 +40,7 @@ class PackageReviewViewModel @Inject constructor(val apiInterface: ApiInterface)
                 _state.update {
                     copy(toast = SingleEvent("Server Error!"), loading = false)
                 }
-            }).isDisposed
+            }).into(this)
     }
 
 }

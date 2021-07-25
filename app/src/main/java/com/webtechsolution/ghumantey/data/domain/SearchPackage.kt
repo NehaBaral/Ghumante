@@ -18,7 +18,9 @@ data class SearchPackageItem(
     val name: String,
     val phone: Long,
     val price: Int,
-    val updatedAt: String
+    val updatedAt: String,
+    val days:String,
+    val image:String
 )
 data class Booking(
     val _id: String,

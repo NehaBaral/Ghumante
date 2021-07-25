@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackagesFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.ui.packages.adapter.PackageListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -55,6 +56,6 @@ class PackagesFragment : BaseFragment() {
 
         adapter.clicks().subscribe {
             findNavController().navigate(PackagesFragmentDirections.actionDestinationFragmentToPackageDetailFragment(it._id))
-        }.isDisposed
+        }.into(this)
     }
 }

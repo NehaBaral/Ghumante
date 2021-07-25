@@ -39,8 +39,12 @@ class MyBookingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = MyBookingAdapter()
         binding.myBookingRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
+            it.toast?.value?.let {
+                toast(it)
+            }
             adapter.submitList(it.myBookingList)
         })
         binding.toolbarApp.apply {

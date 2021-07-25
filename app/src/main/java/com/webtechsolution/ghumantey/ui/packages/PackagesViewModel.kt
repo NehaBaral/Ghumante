@@ -8,6 +8,7 @@ import com.webtechsolution.ghumantey.data.domain.SearchBody
 import com.webtechsolution.ghumantey.data.domain.SearchPackageItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.helpers.set
 import com.webtechsolution.ghumantey.helpers.update
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -62,6 +63,6 @@ class DestinationViewModel @Inject constructor(
                         toast = SingleEvent("Server error")
                     )
                 }
-            }).isDisposed
+            }).into(this)
     }
 }
