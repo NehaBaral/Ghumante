@@ -16,5 +16,7 @@ data class PackageDetail(
     val name: String,
     val phone: Long,
     val price: Int,
-    val updatedAt: String
+    val updatedAt: String,
+    val days:String,
+    val image:String
 )

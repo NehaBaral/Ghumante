@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding3.view.clicks
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.data.domain.SearchPackageItem
 import com.webtechsolution.ghumantey.databinding.PackageListRvBinding
 import dagger.hilt.android.scopes.FragmentScoped
@@ -35,6 +37,10 @@ class PackageListAdapter @Inject constructor() :
         fun bind(item: SearchPackageItem) {
             binding.packageName.text = item.name
             binding.packageAmount.text = "Rs ${item.price.toString()}"
+            Glide.with(binding.root.context)
+                .load(item.image)
+                .placeholder(R.drawable.testimage)
+                .into(binding.packageImage)
             //  binding.packageDays.text = item
             //binding.packageCompany.text = item.agency.firstname
             binding.root.clicks().map { item }.subscribe(clickRelay)

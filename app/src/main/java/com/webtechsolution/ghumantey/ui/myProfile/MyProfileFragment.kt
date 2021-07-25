@@ -11,40 +11,32 @@ import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.MyProfileFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.home_screen_fragment.*
 
 @AndroidEntryPoint
 class MyProfileFragment : BaseFragment() {
     override val viewModel by viewModels<MyProfileViewModel>()
-    lateinit var binding:MyProfileFragmentBinding
+    lateinit var binding: MyProfileFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = MyProfileFragmentBinding.inflate(layoutInflater,container,false)
+        binding = MyProfileFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.apply {
-            toolbarApp.inflateMenu(R.menu.edit)
-            toolbarApp.setOnMenuItemClickListener {
-                findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToProfileEditFragment())
-                true
+            toolbarApp.apply {
+                toolbarTitle.text = "Profile "
+                NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
             }
-            binding.toolbar.apply {
-                toolbarApp.apply {
-                    toolbarTitle.text = "Profile "
-                    NavigationUI.setupWithNavController(this, findNavController())
-                    setNavigationIcon(R.drawable.ic_arrow_back)
-                }
-            }
-            binding.myBooking.setOnClickListener {
-                findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToMyBookingFragment())
-            }
+        }
+        binding.myBooking.setOnClickListener {
+            findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToMyBookingFragment())
         }
     }
 }

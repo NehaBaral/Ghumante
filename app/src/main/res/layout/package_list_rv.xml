@@ -19,7 +19,7 @@
             android:id="@+id/package_image"
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@drawable/testimage" />
     </androidx.cardview.widget.CardView>
 

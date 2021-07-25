@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding3.view.clicks
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.databinding.DestinationRvBinding
 import dagger.hilt.android.scopes.FragmentScoped
@@ -27,6 +29,10 @@ class DestinationAdapter @Inject constructor() : ListAdapter<AgencyPackageItem, 
     class DestinationViewHolder(private val clickRelay: PublishSubject<AgencyPackageItem>,val binding:DestinationRvBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AgencyPackageItem) {
             binding.destinationName.text = item.destination
+            Glide.with(binding.root.context)
+                .load(item.image)
+                .placeholder(R.drawable.testimage)
+                .into(binding.destinationImage)
             binding.root.clicks().map { item }.subscribe(clickRelay)
         }
     }

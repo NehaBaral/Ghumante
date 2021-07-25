@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackageDetailFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
@@ -53,6 +54,10 @@ class PackageDetailFragment : BaseFragment() {
 
         viewModel.pState.observe(viewLifecycleOwner, Observer {uiState->
             uiState.packageDetail.let {item->
+                Glide.with(requireContext())
+                    .load(item?.image)
+                    .placeholder(R.drawable.testimage)
+                    .into(binding.icPackageImage)
                 binding.packageAmount.text = item?.price.toString()
                 binding.packageDesc.text = item?.description.toString()
                 binding.packageDays.text = item?.updatedAt

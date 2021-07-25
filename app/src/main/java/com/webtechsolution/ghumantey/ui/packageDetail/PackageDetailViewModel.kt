@@ -42,6 +42,7 @@ class PackageDetailViewModel @Inject constructor(val apiInterface: ApiInterface,
                     copy(packageDetail = item)
                 }
             }, { throwable ->
+                throwable.printStackTrace()
                 println("Error====" + throwable.message)
                 _pState.update {
                     copy(
