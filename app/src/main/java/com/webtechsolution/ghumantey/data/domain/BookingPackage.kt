@@ -8,7 +8,10 @@ data class BookingPackageItem(
     val author: Author,
     val booking: Boolean,
     val createdAt: String,
-    val updatedAt: String
+    val updatedAt: String,
+    val departureDate: String,
+    val contactInfo: String,
+    val peopleCount: String
 )
 
 data class BookPackageBody(

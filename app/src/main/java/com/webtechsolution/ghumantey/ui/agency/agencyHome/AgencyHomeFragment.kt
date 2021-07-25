@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.AgencyHomeFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
+import com.webtechsolution.ghumantey.ui.agency.agencyHome.adapter.AdaptorAction
 import com.webtechsolution.ghumantey.ui.agency.agencyHome.adapter.AgencyHomeAdapter
 import com.webtechsolution.ghumantey.ui.packageDetail.PackageDetailFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +60,14 @@ class AgencyHomeFragment : BaseFragment() {
         binding.addPackages.setOnClickListener {
             findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToAddPackageFragment(""))
         }
+
+        adapter.clicks().subscribe {
+            when(it){
+                is AdaptorAction.UserDetailClicked -> {
+                    findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToUserDetailFragment(it.agencyPackage._id))
+                }
+            }
+        }.isDisposed
     }
 
     override fun onResume() {

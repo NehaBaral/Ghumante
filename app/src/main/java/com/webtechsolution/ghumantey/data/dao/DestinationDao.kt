@@ -15,4 +15,7 @@ abstract class DestinationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertPackage(destination: List<AgencyPackageItem>)
+
+    @Query("SELECT * FROM AgencyPackageItem WHERE _id =:id ")
+    abstract fun getPackagesById(id:String):Flowable<AgencyPackageItem>
 }

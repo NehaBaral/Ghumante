@@ -16,10 +16,25 @@
         tools:layout="@layout/agency_home_fragment">
         <action
             android:id="@+id/action_agency_home_fragment_to_add_package_fragment"
-            app:destination="@id/add_package_fragment" />
+            app:destination="@id/add_package_fragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"/>
         <action
             android:id="@+id/action_agency_home_fragment_to_agency_booking_fragment"
-            app:destination="@id/agency_booking_fragment" />
+            app:destination="@id/agency_booking_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_agency_home_fragment_to_user_detail_fragment"
+            app:destination="@id/user_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -35,5 +50,14 @@
         android:id="@+id/agency_booking_fragment"
         android:name="com.webtechsolution.ghumantey.ui.agency.agencyBooking.AgencyBookingFragment"
         tools:layout="@layout/agency_booking_fragment" />
+
+    <fragment
+        android:id="@+id/user_detail_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.agency.userDetail.UserDetailFragment"
+        tools:layout="@layout/user_detail_fragment">
+        <argument
+            android:name="packageId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

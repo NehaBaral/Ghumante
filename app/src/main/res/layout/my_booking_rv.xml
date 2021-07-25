@@ -85,14 +85,16 @@
         app:layout_constraintStart_toEndOf="@+id/package_image_cardview"
         app:layout_constraintTop_toBottomOf="@+id/package_days" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        style="?android:attr/ratingBarStyleSmall"
-        android:theme="@style/MyRatingStar"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bookedUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:rating="3.5"
+        android:backgroundTint="@color/white"
+        android:text="Booked User"
+        android:textColor="@color/gray"
+        android:letterSpacing="-0.06"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/phone_num"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/phone_num" />
