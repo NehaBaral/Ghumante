@@ -13,11 +13,7 @@ import com.bumptech.glide.Glide
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.PackageDetailFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
-import com.webtechsolution.ghumantey.ui.packageBook.PackageBookBottomSheet
-import com.webtechsolution.ghumantey.ui.packageDetail.adapter.IternaryAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class PackageDetailFragment : BaseFragment() {
@@ -58,12 +54,12 @@ class PackageDetailFragment : BaseFragment() {
                     .load(item?.image)
                     .placeholder(R.drawable.testimage)
                     .into(binding.icPackageImage)
-                binding.packageAmount.text = item?.price.toString()
+                binding.packageAmount.text = "Rs ${item?.price.toString()}"
                 binding.packageDesc.text = item?.description.toString()
                 binding.packageDays.text = item?.updatedAt
+                binding.iternariesRv.text = item?.iternaries
                 binding.excludedRv.text = item?.excluded
                 binding.includedRv.text = item?.included
-                binding.includedRv.text = item?.iternaries
                 binding.contactNumber.text = item?.phone.toString()
                 binding.contactEmail.text = item?.email
                 val isBooked:Boolean? = item?.bookings?.find {

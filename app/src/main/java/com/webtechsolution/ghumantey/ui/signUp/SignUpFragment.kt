@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.jakewharton.rxbinding3.widget.textChanges
+import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.SignUpFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,7 @@ class SignUpFragment : BaseFragment() {
             toolbarApp.apply {
                 toolbarTitle.text = "Sign Up "
                 NavigationUI.setupWithNavController(this, findNavController())
+                setNavigationIcon(R.drawable.ic_arrow_back)
             }
         }
         binding.apply {
