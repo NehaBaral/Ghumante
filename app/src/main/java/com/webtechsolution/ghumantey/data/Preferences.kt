@@ -2,6 +2,7 @@ package com.webtechsolution.ghumantey.data
 
 import android.content.Context
 import android.preference.PreferenceManager
+import android.text.method.TextKeyListener.clear
 import androidx.core.content.edit
 import com.webtechsolution.ghumantey.data.domain.Login
 import com.webtechsolution.ghumantey.data.model.Auth
@@ -31,6 +32,9 @@ class Preferences @Inject constructor(@ApplicationContext val context: Context) 
     var fcmTokenUploaded:Boolean
     get() = userPreferences.getBoolean(KEY_FCM_TOKEN_UPLOADED,true)
     set(value) = userPreferences.edit { putBoolean(KEY_FCM_TOKEN_UPLOADED,value).apply() }
+    fun clearAll() = userPreferences.edit(true) {
+        clear()
+    }
 
     companion object KEYS {
         const val DEVICE_PREFERENCES = "DEVICE_PREFERENCES"

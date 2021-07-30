@@ -27,16 +27,8 @@ class UserDetailAdapter : ListAdapter<BookingPackageItem, UserDetailAdapter.Agen
             binding.packageName.text = item?.author?.username
             binding.phoneNum.text = item?.contactInfo
             binding.packageDays.text = item?.departureDate
-            binding.packageAmount.text = "${item?.peopleCount} people"
+            binding.packageAmount.text = "${item?.peopleCount} Traveller"
             binding.bookedUser.visibility = View.GONE
-
-            /*binding.packageAmount.text = item.agency
-            if (item?.days.isNullOrEmpty()){
-                binding.packageDays.text = "Not Mentioned"
-            }else {
-                binding.packageDays.text = "${item?.days} days"
-            }*/
-
         }
     }
 }

@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/android project/Ghumante/app/src/main/res/layout/add_package_fragment.xml" value="0.10371376811594203" />
+        <entry key="..\:/android project/Ghumante/app/src/main/res/layout/my_booking_rv.xml" value="0.10371376811594203" />
         <entry key="..\:/android project/Ghumante/app/src/main/res/layout/my_profile_fragment.xml" value="0.3333333333333333" />
+        <entry key="..\:/android project/Ghumante/app/src/main/res/layout/package_detail_fragment.xml" value="0.22" />
+        <entry key="..\:/android project/Ghumante/app/src/main/res/layout/package_list_rv.xml" value="0.10371376811594203" />
+        <entry key="..\:/android project/Ghumante/app/src/main/res/menu/booked_package.xml" value="0.1796875" />
       </map>
     </option>
   </component>

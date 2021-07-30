@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.AddPackageFragmentBinding
 import com.webtechsolution.ghumantey.helpers.FormUtils
@@ -74,6 +75,11 @@ class AddPackageFragment : BaseFragment() {
                 uiState.toast.value?.also {
                     toast(it)
                 }
+
+                Glide.with(requireContext())
+                    .load(uiState.image)
+                    .placeholder(R.drawable.ic_baseline_camera_alt_24)
+                    .into(binding.icPackageImage)
             })
 
             binding.packageImage.setOnClickListener {

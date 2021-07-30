@@ -42,6 +42,7 @@ class PackageDetailFragment : BaseFragment() {
                 toolbarTitle.text = "Detail "
                 NavigationUI.setupWithNavController(this, findNavController())
                 setNavigationIcon(R.drawable.ic_arrow_back)
+                setNavigationIcon(R.drawable.ic_arrow_back)
             }
         }
         binding.bookNowBtn.setOnClickListener {
@@ -56,12 +57,14 @@ class PackageDetailFragment : BaseFragment() {
                     .into(binding.icPackageImage)
                 binding.packageAmount.text = "Rs ${item?.price.toString()}"
                 binding.packageDesc.text = item?.description.toString()
-                binding.packageDays.text = item?.updatedAt
+                binding.packageDays.text = "${item?.days} days"
+                binding.packageName.text = item?.name
                 binding.iternariesRv.text = item?.iternaries
                 binding.excludedRv.text = item?.excluded
                 binding.includedRv.text = item?.included
                 binding.contactNumber.text = item?.phone.toString()
                 binding.contactEmail.text = item?.email
+                binding.agencyName.text = item?.agency?.username
                 val isBooked:Boolean? = item?.bookings?.find {
                     it.author._id == uiState.loginData?.userId
                 }?.booking

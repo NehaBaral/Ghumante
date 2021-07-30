@@ -1,5 +1,6 @@
 package com.webtechsolution.ghumantey.ui.agency.agencyHome
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,11 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
+import com.webtechsolution.ghumantey.MainActivity
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.AgencyHomeFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
+import com.webtechsolution.ghumantey.helpers.into
 import com.webtechsolution.ghumantey.ui.agency.agencyHome.adapter.AdaptorAction
 import com.webtechsolution.ghumantey.ui.agency.agencyHome.adapter.AgencyHomeAdapter
 import com.webtechsolution.ghumantey.ui.packageDetail.PackageDetailFragmentArgs
@@ -40,6 +43,11 @@ class AgencyHomeFragment : BaseFragment() {
         binding.agencyPackageRv.adapter = adapter
         viewModel.state.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.agencyPackageList)
+            it.logout.value?.let {
+                val intent: Intent = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
         })
 
           binding.appToolbar.apply {
@@ -48,8 +56,8 @@ class AgencyHomeFragment : BaseFragment() {
                     inflateMenu(R.menu.booked_package)
                     setOnMenuItemClickListener {
                         when(it.itemId){
-                            R.id.booked_package ->{
-                                findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToAgencyBookingFragment())
+                            R.id.logout ->{
+                                viewModel.logOut()
                             }
                         }
                         true
@@ -61,13 +69,15 @@ class AgencyHomeFragment : BaseFragment() {
             findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToAddPackageFragment(""))
         }
 
-        adapter.clicks().subscribe {
+        adapter.clicks().subscribe ({
             when(it){
                 is AdaptorAction.UserDetailClicked -> {
                     findNavController().navigate(AgencyHomeFragmentDirections.actionAgencyHomeFragmentToUserDetailFragment(it.agencyPackage._id))
                 }
             }
-        }.isDisposed
+        },{
+            it.printStackTrace()
+        }).into(this)
     }
 
     override fun onResume() {

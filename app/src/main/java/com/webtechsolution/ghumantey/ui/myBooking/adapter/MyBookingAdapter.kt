@@ -1,6 +1,7 @@
 package com.webtechsolution.ghumantey.ui.myBooking.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -31,6 +32,7 @@ class MyBookingAdapter @Inject constructor() : ListAdapter<SearchPackageItem,MyB
             binding.packageAmount.text = item.price.toString()
             binding.packageDays.text = "${item.days} days"
             binding.phoneNum.text = item.email
+            binding.bookedUser.visibility = View.GONE
             Glide.with(binding.root.context)
                 .load(item.image)
                 .placeholder(R.drawable.testimage)

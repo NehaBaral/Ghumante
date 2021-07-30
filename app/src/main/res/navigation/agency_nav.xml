@@ -59,4 +59,9 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/my_profile_fragment"
+        android:name="com.webtechsolution.ghumantey.ui.myProfile.MyProfileFragment"
+        tools:layout="@layout/my_profile_fragment"/>
+
 </navigation>

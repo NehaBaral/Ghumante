@@ -42,18 +42,14 @@ class SignUpFragment : BaseFragment() {
                 val username = icSignupUname.text.toString()
                 val password = icSignupPassword.text.toString()
                 if (username.isBlank()){
-                    icSignupUnameField.error = "Please enter valid name"
-                }
-                if (username.length < 2){
-                    icSignupUnameField.error = "Please enter valid name"
-                }
-                if (password.isBlank()){
-                    icSignupPasswordField.error = "Please enter valid password"
-                }
-                if (password.length <4){
-                    icSignupPasswordField.error = "Please enter valid password"
-                }
-                if (username.isNotBlank()){
+                    toast("Please enter valid name")
+                }else if (username.length < 2){
+                    toast("Please enter valid name")
+                } else if (password.isBlank()){
+                    toast("Please enter valid password")
+                }else if (password.length <4){
+                    toast("Please enter valid password")
+                }else{
                     val agencySwitch = binding.agencyPacSwitch.isChecked
                     viewModel.userRegister(username,password,agencySwitch)
                 }

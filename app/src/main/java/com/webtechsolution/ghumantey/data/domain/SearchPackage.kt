@@ -5,7 +5,7 @@ class SearchPackage : ArrayList<SearchPackageItem>()
 data class SearchPackageItem(
     val __v: Int,
     val _id: String,
-    val agency: String,
+    val agency: Agency,
     val bookings: List<Booking>,
     val comments: List<Comment>,
     val createdAt: String,

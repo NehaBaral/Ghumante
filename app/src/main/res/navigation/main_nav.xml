@@ -51,7 +51,7 @@
         tools:layout="@layout/my_profile_fragment">
 
         <action
-            android:id="@+id/action_my_profile_fragment_to_my_booking_fragment"
+            android:id="@+id/action_my_profile_fragment_to_my_booking_fragment2"
             app:destination="@id/my_booking_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

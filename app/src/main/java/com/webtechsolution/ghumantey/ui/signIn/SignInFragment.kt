@@ -18,14 +18,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignInFragment : BaseFragment() {
     override val viewModel by viewModels<SignInViewModel>()
-    lateinit var binding:SignInFragmentBinding
+    lateinit var binding: SignInFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = SignInFragmentBinding.inflate(layoutInflater,container,false)
+        binding = SignInFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -40,34 +40,30 @@ class SignInFragment : BaseFragment() {
         }
         binding.apply {
             signInBtn.setOnClickListener {
-          //      findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                //      findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
                 val email = icEmail.text.toString()
                 val password = icPassword.text.toString()
 
-                if (password.isBlank()) {
-                    icPasswordField.error = "Please enter valid password"
-                }
                 if (email.isBlank()) {
-                    icEmailField.error = "Please enter valid email"
-                }
-                if (email.isNotBlank() && password.isNotBlank()) {
-                    val agencySwitch = binding.agencyPacSwitch.isChecked
-                    viewModel.userSignIn(email, password,agencySwitch)
+                    toast("Enter enter username")
+                } else if (password.isBlank()) {
+                    toast("Please enter password")
                 } else {
-                    icEmailField.error = "Please enter valid email"
+                    val agencySwitch = binding.agencyPacSwitch.isChecked
+                    viewModel.userSignIn(email, password, agencySwitch)
                 }
                 viewModel.state.observe(viewLifecycleOwner, Observer { uiState ->
-                    /*if (uiState.loadingDialog) showLoadingDialog("Signing you up")
-                    else hideLoadingDialog()*/
-                    //uiState.toast.value.let { toast(it!!) }
+                    if (uiState.loadingDialog) showLoadingDialog("Signing you up")
+                    else hideLoadingDialog()
+                    uiState.toast.value?.let { toast(it) }
                     binding.icEmail.error = uiState.emailError
                     binding.icPassword.error = uiState.passwordError
                     uiState.success.value?.let {
                         //hideLoadingDialog()
                         uiState.signInResponse.value?.also {
-                            if (!it.agency){
+                            if (!it.agency) {
                                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
-                            }else{
+                            } else {
                                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToAgencyHomeFragment())
                             }
                         }
@@ -75,8 +71,10 @@ class SignInFragment : BaseFragment() {
                 })
             }
 
-            binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }.into(this@SignInFragment)
-            binding.icPassword.textChanges().subscribe { binding.icPasswordField.error = null }.into(this@SignInFragment)
+            binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }
+                .into(this@SignInFragment)
+            binding.icPassword.textChanges().subscribe { binding.icPasswordField.error = null }
+                .into(this@SignInFragment)
         }
     }
 }

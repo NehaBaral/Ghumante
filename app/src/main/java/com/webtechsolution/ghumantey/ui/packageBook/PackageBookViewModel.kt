@@ -30,17 +30,29 @@ class PackageBookViewModel @Inject constructor(
     private val _state = MutableLiveData(PackageBookUiState())
     val state = _state as LiveData<PackageBookUiState>
     fun bookPackage(packageId:String,travellerNum: String, date: String, contact: String) {
-        _state.update { copy(loading = true) }
-        val packageBody:BookPackageBody = BookPackageBody(true,date,contact,travellerNum)
-        apiInterface.bookPackage("Bearer ${preference.authInfo!!.token}",packageId,packageBody)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _state.update { copy(loading = false,success = Unit.toEvent()) }
-            },{
-                it.printStackTrace()
-                it.message
-                _state.update { copy(loading = false,toast = SingleEvent("Booking Failed")) }
-            }).into(this)
+        if (travellerNum.isEmpty()){
+            _state.update { copy(toast = SingleEvent("Enter traveller number")) }
+        }else if (date.isEmpty()){
+            _state.update { copy(toast = SingleEvent("Enter date")) }
+        }else if (contact.isEmpty()){
+            _state.update { copy(toast = SingleEvent("Enter contact")) }
+        }else {
+            _state.update { copy(loading = true) }
+            val packageBody: BookPackageBody = BookPackageBody(true, date, contact, travellerNum)
+            apiInterface.bookPackage(
+                "Bearer ${preference.authInfo!!.token}",
+                packageId,
+                packageBody
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _state.update { copy(loading = false, success = Unit.toEvent()) }
+                }, {
+                    it.printStackTrace()
+                    it.message
+                    _state.update { copy(loading = false, toast = SingleEvent("Booking Failed")) }
+                }).into(this)
+        }
     }
 }

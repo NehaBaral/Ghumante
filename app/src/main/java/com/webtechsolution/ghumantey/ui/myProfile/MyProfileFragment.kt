@@ -1,5 +1,6 @@
 package com.webtechsolution.ghumantey.ui.myProfile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.webtechsolution.ghumantey.MainActivity
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.MyProfileFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
@@ -38,9 +40,14 @@ class MyProfileFragment : BaseFragment() {
         }
         viewModel.state.observe(viewLifecycleOwner, Observer {
             binding.profileName.text = it.username
+            it.signUp.value?.let {
+                val intent:Intent = Intent(requireActivity(),MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
         })
         binding.myBooking.setOnClickListener {
-            findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToMyBookingFragment())
+            findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToMyBookingFragment2())
         }
 
         binding.logOut.setOnClickListener {

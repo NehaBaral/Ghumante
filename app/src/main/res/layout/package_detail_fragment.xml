@@ -14,11 +14,30 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="50dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/package_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Package Name"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/package_image_cardview"
@@ -29,7 +48,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/package_name"
                     app:layout_constraintVertical_bias="0.0">
 
                     <ImageView
@@ -165,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="Included"
+                        android:text="Excluded"
                         android:textColor="@android:color/black"
                         android:textSize="15sp"
                         android:textStyle="bold"
@@ -216,6 +235,13 @@
                         android:layout_marginStart="16dp"
                         android:text="neha@gmail.com" />
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/agency_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Package name" />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/write_review_btn"
                         android:layout_width="match_parent"
@@ -232,10 +258,11 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/review_list"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
                         android:backgroundTint="@android:color/white"
                         android:text="Package reviews"
                         android:textColor="@android:color/black"

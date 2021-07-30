@@ -37,6 +37,8 @@ class PackageListAdapter @Inject constructor() :
         fun bind(item: SearchPackageItem) {
             binding.packageName.text = item.name
             binding.packageAmount.text = "Rs ${item.price.toString()}"
+            binding.packageDays.text = "${item.days} days"
+            binding.packageCompany.text = item.agency.username
             Glide.with(binding.root.context)
                 .load(item.image)
                 .placeholder(R.drawable.testimage)

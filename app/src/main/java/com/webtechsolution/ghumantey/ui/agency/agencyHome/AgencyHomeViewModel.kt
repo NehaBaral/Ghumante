@@ -11,12 +11,15 @@ import com.webtechsolution.ghumantey.data.domain.AgencyPackageItem
 import com.webtechsolution.ghumantey.helpers.SingleEvent
 import com.webtechsolution.ghumantey.helpers.base.BaseViewModel
 import com.webtechsolution.ghumantey.helpers.set
+import com.webtechsolution.ghumantey.helpers.toEvent
+import com.webtechsolution.ghumantey.helpers.update
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 data class AgencyHomeUiState(
     val toast:SingleEvent<String> = SingleEvent(),
-    val agencyPackageList:List<AgencyPackageItem> = emptyList()
+    val agencyPackageList:List<AgencyPackageItem> = emptyList(),
+    val logout:SingleEvent<Unit> = SingleEvent()
 )
 @HiltViewModel
 class AgencyHomeViewModel @Inject constructor(val apiInterface: ApiInterface,val preference:Preferences) : BaseViewModel() {
@@ -38,5 +41,10 @@ class AgencyHomeViewModel @Inject constructor(val apiInterface: ApiInterface,val
                     it.copy(toast = SingleEvent("Failed"))
                 }
             }).isDisposed
+    }
+
+    fun logOut() {
+        preference.clearAll()
+        _state.update { copy(logout = Unit.toEvent()) }
     }
 }

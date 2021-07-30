@@ -22,13 +22,11 @@ class MainActivity : AppCompatActivity() {
             }
         } else
             if (preferences.isAgency == false) {
-                (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController.setGraph(
-                    R.navigation.main_nav
-                )
+                (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+                    .setGraph(R.navigation.main_nav)
             } else {
-                (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController.setGraph(
-                    R.navigation.agency_nav
-                )
+                (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+                    .setGraph(R.navigation.agency_nav)
             }
     }
 }
