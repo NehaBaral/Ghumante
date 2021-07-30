@@ -17,5 +17,6 @@ data class Login(
     val success: Boolean,
     val token: String,
     val agency:Boolean,
-    val userId:String
+    val userId:String,
+    val userName:String
 )

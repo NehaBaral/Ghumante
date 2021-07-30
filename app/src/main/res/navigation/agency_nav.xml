@@ -5,7 +5,6 @@
     android:id="@+id/agency_nav"
     app:startDestination="@id/agency_home_fragment">
 
-    <include app:graph="@navigation/nav_view" />
     <action
         android:id="@+id/action_to_auth"
         app:destination="@id/nav_view" />

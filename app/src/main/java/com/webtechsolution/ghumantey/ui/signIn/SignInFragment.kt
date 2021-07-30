@@ -12,6 +12,7 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import com.webtechsolution.ghumantey.R
 import com.webtechsolution.ghumantey.databinding.SignInFragmentBinding
 import com.webtechsolution.ghumantey.helpers.base.BaseFragment
+import com.webtechsolution.ghumantey.helpers.into
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,17 +64,19 @@ class SignInFragment : BaseFragment() {
                     binding.icPassword.error = uiState.passwordError
                     uiState.success.value?.let {
                         //hideLoadingDialog()
-                        if (!uiState.signInResponse?.agency!!){
-                            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
-                        }else{
-                            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToAgencyHomeFragment())
+                        uiState.signInResponse.value?.also {
+                            if (!it.agency){
+                                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment())
+                            }else{
+                                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToAgencyHomeFragment())
+                            }
                         }
                     }
                 })
             }
 
-            binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }.isDisposed
-            binding.icPassword.textChanges().subscribe { binding.icPasswordField.error = null }.isDisposed
+            binding.icEmail.textChanges().subscribe { binding.icEmailField.error = null }.into(this@SignInFragment)
+            binding.icPassword.textChanges().subscribe { binding.icPasswordField.error = null }.into(this@SignInFragment)
         }
     }
 }

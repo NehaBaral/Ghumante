@@ -22,7 +22,7 @@ data class SignInUiState(
     val passwordError: String? = null,
     val toast: SingleEvent<String> = SingleEvent(),
     val success: SingleEvent<Unit> = SingleEvent(),
-    val signInResponse: Login?=null
+    val signInResponse: SingleEvent<Login> = SingleEvent()
 )
 @HiltViewModel
 class SignInViewModel @Inject constructor(private val apiInterface: ApiInterface
@@ -42,7 +42,7 @@ class SignInViewModel @Inject constructor(private val apiInterface: ApiInterface
                         toast = SingleEvent("Login Successful"),
                         loadingDialog = false,
                         success = Unit.toEvent(),
-                        signInResponse = loginResponse
+                        signInResponse = loginResponse.toEvent()
                     )
                 }
             }, {throwable->

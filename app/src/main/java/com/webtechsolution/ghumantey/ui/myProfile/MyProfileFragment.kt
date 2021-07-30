@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.webtechsolution.ghumantey.R
@@ -35,8 +36,15 @@ class MyProfileFragment : BaseFragment() {
                 setNavigationIcon(R.drawable.ic_arrow_back)
             }
         }
+        viewModel.state.observe(viewLifecycleOwner, Observer {
+            binding.profileName.text = it.username
+        })
         binding.myBooking.setOnClickListener {
             findNavController().navigate(MyProfileFragmentDirections.actionMyProfileFragmentToMyBookingFragment())
+        }
+
+        binding.logOut.setOnClickListener {
+            viewModel.signUp()
         }
     }
 }

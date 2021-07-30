@@ -1,5 +1,6 @@
 package com.webtechsolution.ghumantey
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
@@ -15,21 +16,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (preferences.isAgency == false){
-            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController.setGraph(R.navigation.main_nav)
-        }else{
-            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController.setGraph(R.navigation.agency_nav)
-        }
         if (!preferences.isUserLoggedIn) {
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController.apply {
-                popBackStack()
-                if (preferences.isAgency == false){
-                    navigate(MainNavDirections.actionToAuth())
-                }else{
-                    navigate(AgencyNavDirections.actionToAuth())
-                }
-
+                setGraph(R.navigation.nav_view)
             }
-        }
+        } else
+            if (preferences.isAgency == false) {
+                (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController.setGraph(
+                    R.navigation.main_nav
+                )
+            } else {
+                (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController.setGraph(
+                    R.navigation.agency_nav
+                )
+            }
     }
 }

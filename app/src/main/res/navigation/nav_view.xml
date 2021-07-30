@@ -30,7 +30,7 @@
         tools:layout="@layout/sign_in_fragment">
         <action
             android:id="@+id/action_sign_in_fragment_to_home_screen_fragment"
-            app:destination="@id/home_screen_fragment"
+            app:destination="@id/main_nav"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -41,7 +41,7 @@
 
         <action
             android:id="@+id/action_sign_in_fragment_to_agency_home_fragment"
-            app:destination="@id/agency_home_fragment"
+            app:destination="@id/agency_nav"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -67,5 +67,8 @@
     <!--<dialog android:id="@+id/package_book_bottomSheet"
         android:name="com.webtechsolution.ghumantey.ui.packageBook.PackageBookBottomSheet"
         tools:layout="@layout/package_book_bottomsheet"/>-->
+
+    <include app:graph="@navigation/main_nav" />
+    <include app:graph="@navigation/agency_nav" />
 
 </navigation>

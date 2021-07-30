@@ -5,7 +5,6 @@
     android:id="@+id/main_nav"
     app:startDestination="@id/home_screen_fragment">
 
-    <include app:graph="@navigation/nav_view" />
     <action
         android:id="@+id/action_to_auth"
         app:destination="@id/nav_view" />
@@ -50,29 +49,10 @@
         android:id="@+id/my_profile_fragment"
         android:name="com.webtechsolution.ghumantey.ui.myProfile.MyProfileFragment"
         tools:layout="@layout/my_profile_fragment">
-        <action
-            android:id="@+id/action_my_profile_fragment_to_profile_edit_fragment"
-            app:destination="@id/profile_edit_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+
         <action
             android:id="@+id/action_my_profile_fragment_to_my_booking_fragment"
             app:destination="@id/my_booking_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/profile_edit_fragment"
-        android:name="com.webtechsolution.ghumantey.ui.profileEdit.ProfileEditFragment"
-        tools:layout="@layout/profile_edit_fragment">
-        <action
-            android:id="@+id/action_profile_edit_fragment_to_my_profile_fragment"
-            app:destination="@id/my_profile_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
